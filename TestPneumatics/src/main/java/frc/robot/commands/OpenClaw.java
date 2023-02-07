@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.PneumaticClawSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
@@ -25,7 +26,9 @@ public class OpenClaw extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    PneumaticClawSubsystem.getPiston().set(kForward); // why is kForward not getting recognized
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -33,7 +36,9 @@ public class OpenClaw extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    // IDK WHETHER THIS NEEDS ANYTHING HERE
+  }
 
   // Returns true when the command should end.
   @Override

@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class PneumaticClawSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
 
-  Solenoid piston; // need to confirm whether this uses Solenoid or DoubleSolenoid
+  private static Solenoid piston; // need to confirm whether this uses Solenoid or DoubleSolenoid
  
 
   public PneumaticClawSubsystem() {
@@ -51,5 +51,10 @@ public class PneumaticClawSubsystem extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
+  }
+
+  public static Solenoid getPiston()
+  {
+    return piston;
   }
 }
