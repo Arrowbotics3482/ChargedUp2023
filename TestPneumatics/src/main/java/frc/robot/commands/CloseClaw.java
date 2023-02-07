@@ -11,16 +11,17 @@ import frc.robot.subsystems.PneumaticClawSubsystem;
 
 
 /** An example command that uses an example subsystem. */
-public class OpenClaw extends CommandBase {
+public class CloseClaw extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   //private final ExampleSubsystem m_subsystem;
   private final PneumaticClawSubsystem m_subsystem;
+
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public OpenClaw(PneumaticClawSubsystem subsystem) {
+  public CloseClaw(PneumaticClawSubsystem subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -29,7 +30,7 @@ public class OpenClaw extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    PneumaticClawSubsystem.getPiston().set(Value.kForward); // why is kForward not getting recognized
+    PneumaticClawSubsystem.getPiston().set(Value.kReverse); // why is kForward not getting recognized
   }
 
   // Called every time the scheduler runs while the command is scheduled.

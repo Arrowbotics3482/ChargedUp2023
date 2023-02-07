@@ -4,18 +4,23 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-public class PneumaticClawSubsystem extends SubsystemBase {
+public class ControllerSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
+  
+  private static Joystick controller;
+  private static JoystickButton button1;
+  private static JoystickButton button2;
 
-  private static DoubleSolenoid piston;
- 
+  public ControllerSubsystem() {
+    controller = new Joystick(0); // plz change
+    button1 = new JoystickButton(controller, 1); // please change
+    button2 = new JoystickButton(controller, 2); // please change
 
-  public PneumaticClawSubsystem() {
-    piston = new DoubleSolenoid(null, 0, 0); // change this
   }
 
   /**
@@ -52,8 +57,13 @@ public class PneumaticClawSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-  public static DoubleSolenoid getPiston()
+  public static JoystickButton getButton1()
   {
-    return piston;
+    return button1;
+  }
+
+  public static JoystickButton getButton2()
+  {
+    return button2;
   }
 }
