@@ -4,18 +4,20 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ControllerSubsystem extends SubsystemBase {
-
-  public static Joystick controller;
-
+public class MotorSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   
-  public ControllerSubsystem() {
-    controller = new Joystick(0);
+  private static Spark motor; // the CANSparkMax doesn't exist
+  
+  // private Talon motor2;
+
+  public MotorSubsystem() {
+        motor = new Spark(3);
+
   }
 
   /**
@@ -52,9 +54,9 @@ public class ControllerSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-  public static Joystick getController()
+  public static Spark getMotor()
   {
-    return controller;
+    return motor;
   }
 
 }
