@@ -15,7 +15,7 @@ public class ControllerSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   
   public ControllerSubsystem() {
-    controller = new Joystick(0);
+    controller = new Joystick(1);
   }
 
   /**

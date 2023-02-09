@@ -4,7 +4,9 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -12,10 +14,17 @@ public class PneumaticClawSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
 
   private static DoubleSolenoid piston;
+  Compressor phCompressor;
+
  
 
   public PneumaticClawSubsystem() {
     piston = new DoubleSolenoid(null, 0, 0); // change this
+    phCompressor = new Compressor(1, PneumaticsModuleType.REVPH);
+    
+    phCompressor.enableDigital();
+    phCompressor.disable();
+
   }
 
   /**

@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import java.io.Console;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -84,7 +86,9 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    MotorSubsystem.getMotor().set(ControllerSubsystem.getController().getRawAxis(0)); // change axis as needed -s
+    //MotorSubsystem.getMotor().set(ControllerSubsystem.getController().getRawAxis(5)); // change axis as needed -s
+    // Console.log("alden is a pupu");
+    
   }
 
   @Override

@@ -8,13 +8,14 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class ControllerSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   
   private static Joystick controller;
-  private static JoystickButton button1;
-  private static JoystickButton button2;
+  private static Trigger button1;
+  private static Trigger button2;
 
   public ControllerSubsystem() {
     controller = new Joystick(0); // plz change
@@ -57,12 +58,12 @@ public class ControllerSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-  public static JoystickButton getButton1()
+  public static Trigger getButton1()
   {
     return button1;
   }
 
-  public static JoystickButton getButton2()
+  public static Trigger getButton2()
   {
     return button2;
   }

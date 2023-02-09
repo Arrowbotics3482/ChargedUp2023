@@ -58,8 +58,10 @@ public class RobotContainer {
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
 
-    ControllerSubsystem.getButton1().whenPressed(new OpenClaw(pneumaticClawSubsystem));
-    ControllerSubsystem.getButton2().whenPressed(new CloseClaw(pneumaticClawSubsystem));
+    ControllerSubsystem.getButton1().onTrue(new OpenClaw(pneumaticClawSubsystem));
+    ControllerSubsystem.getButton2().onTrue(new CloseClaw(pneumaticClawSubsystem));
+
+    
     // something is weird with whenPressed, idk why it is crossed out, please click on the definition
 
   }
