@@ -4,47 +4,41 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.PneumaticClawSubsystem;
-
+import frc.robot.subsystems.MotorSubsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class OpenClaw extends CommandBase {
+public class MotorSpin extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  //private final ExampleSubsystem m_subsystem;
-  private final PneumaticClawSubsystem m_subsystem;
+  private final MotorSubsystem motorSubsystem;
+
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public OpenClaw(PneumaticClawSubsystem subsystem) {
-    m_subsystem = subsystem;
+  public MotorSpin(MotorSubsystem motorSubsystem) {
+    this.motorSubsystem = motorSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(motorSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    PneumaticClawSubsystem.getCompressor().enableDigital(); // idk whether this should go here or in execute, or both
-    // we need the whole system at 60 because we don't want anything to blow up
-    PneumaticClawSubsystem.getPiston().set(Value.kForward);
+    motorSubsystem.getMotor().set(0.2);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // IDK WHETHER THIS NEEDS ANYTHING HERE
-    PneumaticClawSubsystem.getPiston().set(Value.kOff);
-    PneumaticClawSubsystem.getCompressor().disable();
+    motorSubsystem.getMotor().set(0);
   }
 
   // Returns true when the command should end.

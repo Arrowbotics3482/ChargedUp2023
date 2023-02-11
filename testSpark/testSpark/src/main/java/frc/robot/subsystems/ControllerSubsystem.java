@@ -7,15 +7,18 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 public class ControllerSubsystem extends SubsystemBase {
 
   public static Joystick controller;
+  private static POVButton button;
 
   /** Creates a new ExampleSubsystem. */
   
   public ControllerSubsystem() {
-    controller = new Joystick(1);
+    controller = new Joystick(0);
+    button = new POVButton(controller, 0);
   }
 
   /**
@@ -56,5 +59,8 @@ public class ControllerSubsystem extends SubsystemBase {
   {
     return controller;
   }
-
+  public static POVButton getButton()
+  {
+    return button;
+  }
 }

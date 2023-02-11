@@ -14,16 +14,16 @@ public class PneumaticClawSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
 
   private static DoubleSolenoid piston;
-  Compressor phCompressor;
+  private static Compressor compressor;
 
  
 
   public PneumaticClawSubsystem() {
     piston = new DoubleSolenoid(null, 0, 0); // change this
-    phCompressor = new Compressor(1, PneumaticsModuleType.REVPH);
+    compressor = new Compressor(1, PneumaticsModuleType.REVPH);
     
-    phCompressor.enableDigital();
-    phCompressor.disable();
+    compressor.enableDigital();
+    compressor.disable(); // we need this here because the robot will turn on everything at the very beginning, and we dont want the compressor to start yet.
 
   }
 
@@ -59,6 +59,11 @@ public class PneumaticClawSubsystem extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
+  }
+
+  public static Compressor getCompressor()
+  {
+    return compressor;
   }
 
   public static DoubleSolenoid getPiston()

@@ -86,7 +86,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    //MotorSubsystem.getMotor().set(ControllerSubsystem.getController().getRawAxis(5)); // change axis as needed -s
+     // change axis as needed -s
     // Console.log("alden is a pupu");
     
   }

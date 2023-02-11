@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.MotorSpin;
 import frc.robot.subsystems.ControllerSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.MotorSubsystem;
@@ -61,6 +62,8 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     //m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    //MotorSubsystem.getMotor().set(ControllerSubsystem.getController().getRawAxis(1));
+    ControllerSubsystem.getButton().whileTrue(new MotorSpin(motorSubsystem));
   }
 
   /**

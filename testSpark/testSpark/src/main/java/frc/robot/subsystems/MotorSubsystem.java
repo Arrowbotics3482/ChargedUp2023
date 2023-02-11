@@ -4,10 +4,13 @@
 
 package frc.robot.subsystems;
 
+import java.nio.channels.Channel;
+
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class MotorSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
@@ -17,7 +20,7 @@ public class MotorSubsystem extends SubsystemBase {
   // private Talon motor2;
 
   public MotorSubsystem() {
-        motor = new Spark(9);
+        motor = new Spark(0);
 
   }
 
@@ -48,7 +51,7 @@ public class MotorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("axis value: ", ControllerSubsystem.getController().getRawAxis(3));
+    //SmartDashboard.putNumber("axis value: ", ControllerSubsystem.getController().getRawAxis(1));
   }
 
   @Override
