@@ -15,5 +15,7 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+    public static final int pwmchannel = 0;
+    public static final double intakeMotorPercent = 0.5;
   }
 }

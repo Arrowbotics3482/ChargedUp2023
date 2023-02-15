@@ -4,21 +4,28 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 public class ControllerSubsystem extends SubsystemBase {
 
-  public static Joystick controller;
+  //private static Joystick controller;
   private static POVButton button;
+  //private static JoystickButton buton;
+  private static GenericHID controller;
 
   /** Creates a new ExampleSubsystem. */
   
   public ControllerSubsystem() {
-    controller = new Joystick(0);
+    //controller = new Joystick(0);
+    controller = new GenericHID(0);
     button = new POVButton(controller, 0);
+    // buton = new JoystickButton(controller, 1);
+
   }
 
   /**
@@ -55,7 +62,7 @@ public class ControllerSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-  public static Joystick getController()
+  public static GenericHID getController()
   {
     return controller;
   }
@@ -63,4 +70,11 @@ public class ControllerSubsystem extends SubsystemBase {
   {
     return button;
   }
+  
+  /*
+   * public static JoystickButton getButon(){
+    return buton;
+  }
+   */
+  
 }

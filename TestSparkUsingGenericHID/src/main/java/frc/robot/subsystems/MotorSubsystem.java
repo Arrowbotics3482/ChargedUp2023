@@ -4,27 +4,23 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
+import java.nio.channels.Channel;
+
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.Constants;
 
-public class ControllerSubsystem extends SubsystemBase {
-
-  //private static Joystick controller;
-  private static POVButton button;
-  //private static JoystickButton buton;
-  private static GenericHID controller;
-
+public class MotorSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   
-  public ControllerSubsystem() {
-    //controller = new Joystick(0);
-    controller = new GenericHID(0);
-    button = new POVButton(controller, 0);
-    // buton = new JoystickButton(controller, 1);
+  private static Spark motor; // the CANSparkMax doesn't exist
+  
+  // private Talon motor2;
+
+  public MotorSubsystem() {
+        motor = new Spark(1);
 
   }
 
@@ -55,6 +51,7 @@ public class ControllerSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    //SmartDashboard.putNumber("axis value: ", ControllerSubsystem.getController().getRawAxis(1));
   }
 
   @Override
@@ -62,19 +59,9 @@ public class ControllerSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-  public static GenericHID getController()
+  public static Spark getMotor()
   {
-    return controller;
+    return motor;
   }
-  public static POVButton getButton()
-  {
-    return button;
-  }
-  
-  /*
-   * public static JoystickButton getButon(){
-    return buton;
-  }
-   */
-  
+
 }
