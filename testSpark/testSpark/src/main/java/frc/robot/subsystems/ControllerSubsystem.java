@@ -16,13 +16,13 @@ public class ControllerSubsystem extends SubsystemBase {
   //private static Joystick controller;
   private static POVButton button;
   //private static JoystickButton buton;
-  private static GenericHID controller;
+  private static Joystick controller;
 
   /** Creates a new ExampleSubsystem. */
   
   public ControllerSubsystem() {
     //controller = new Joystick(0);
-    controller = new GenericHID(0);
+    controller = new Joystick(0);
     button = new POVButton(controller, 0);
     // buton = new JoystickButton(controller, 1);
 
@@ -62,7 +62,7 @@ public class ControllerSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-  public static GenericHID getController()
+  public static Joystick getController()
   {
     return controller;
   }

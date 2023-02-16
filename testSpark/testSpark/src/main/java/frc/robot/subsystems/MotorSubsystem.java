@@ -20,7 +20,7 @@ public class MotorSubsystem extends SubsystemBase {
   // private Talon motor2;
 
   public MotorSubsystem() {
-        motor = new Spark(0);
+        motor = new Spark(9);
 
   }
 
