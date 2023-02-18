@@ -30,8 +30,11 @@ public class CloseClaw extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    PneumaticClawSubsystem.getCompressor().enableDigital();
-    PneumaticClawSubsystem.getPiston().set(Value.kReverse); // why is kForward not getting recognized
+    
+    
+    //PneumaticClawSubsystem.getCompressor().enableAnalog(1, 5);
+
+    PneumaticClawSubsystem.getPiston().set(Value.kReverse);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -44,7 +47,7 @@ public class CloseClaw extends CommandBase {
   public void end(boolean interrupted) {
     // IDK WHETHER THIS NEEDS ANYTHING HERE
     PneumaticClawSubsystem.getPiston().set(Value.kOff);
-    PneumaticClawSubsystem.getCompressor().disable();
+     //PneumaticClawSubsystem.getCompressor().disable();
   }
 
   // Returns true when the command should end.

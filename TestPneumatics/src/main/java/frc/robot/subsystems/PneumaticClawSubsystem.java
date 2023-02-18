@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -19,12 +20,11 @@ public class PneumaticClawSubsystem extends SubsystemBase {
  
 
   public PneumaticClawSubsystem() {
-    piston = new DoubleSolenoid(null, 0, 0); // change this
-    compressor = new Compressor(1, PneumaticsModuleType.REVPH);
+    piston = new DoubleSolenoid(PneumaticsModuleType.REVPH, 1, 0); // change this
+    compressor = new Compressor(1, PneumaticsModuleType.REVPH); // the default module for PH is 1
     
-    compressor.enableDigital();
-    compressor.disable(); // we need this here because the robot will turn on everything at the very beginning, and we dont want the compressor to start yet.
-
+    compressor.enableAnalog(1, 5); // check if the min pressure should be 30
+    
   }
 
   /**
@@ -54,7 +54,8 @@ public class PneumaticClawSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-  }
+    SmartDashboard.putNumber("Pressure value: ", (24.02 + compressor.getPressure())); // added 24.02 to zero it, but idk if it's even important to do so
+  } 
 
   @Override
   public void simulationPeriodic() {

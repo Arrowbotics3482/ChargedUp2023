@@ -29,14 +29,14 @@ public class OpenClaw extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    PneumaticClawSubsystem.getCompressor().enableDigital(); // idk whether this should go here or in execute, or both
-    // we need the whole system at 60 because we don't want anything to blow up
+    //PneumaticClawSubsystem.getCompressor().enableAnalog(1, 5); 
     PneumaticClawSubsystem.getPiston().set(Value.kForward);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
   }
 
   // Called once the command ends or is interrupted.
@@ -44,7 +44,7 @@ public class OpenClaw extends CommandBase {
   public void end(boolean interrupted) {
     // IDK WHETHER THIS NEEDS ANYTHING HERE
     PneumaticClawSubsystem.getPiston().set(Value.kOff);
-    PneumaticClawSubsystem.getCompressor().disable();
+    //PneumaticClawSubsystem.getCompressor().disable();
   }
 
   // Returns true when the command should end.
