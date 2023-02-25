@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.PneumaticClawSubsystem;
 
-
 /** An example command that uses an example subsystem. */
 public class OpenClaw extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  //private final ExampleSubsystem m_subsystem;
+  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
+  // private final ExampleSubsystem m_subsystem;
   private final PneumaticClawSubsystem m_subsystem;
+
   /**
    * Creates a new ExampleCommand.
    *
@@ -29,8 +29,9 @@ public class OpenClaw extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //PneumaticClawSubsystem.getCompressor().enableAnalog(1, 5); 
-    PneumaticClawSubsystem.getPiston().set(Value.kForward);
+    // PneumaticClawSubsystem.getCompressor().enableAnalog(1, 5);
+    PneumaticClawSubsystem.getPiston1().set(Value.kForward);
+    PneumaticClawSubsystem.getPiston2().set(Value.kForward);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -43,8 +44,9 @@ public class OpenClaw extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // IDK WHETHER THIS NEEDS ANYTHING HERE
-    PneumaticClawSubsystem.getPiston().set(Value.kOff);
-    //PneumaticClawSubsystem.getCompressor().disable();
+    PneumaticClawSubsystem.getPiston1().set(Value.kOff);
+    PneumaticClawSubsystem.getPiston2().set(Value.kOff);
+    // PneumaticClawSubsystem.getCompressor().disable();
   }
 
   // Returns true when the command should end.

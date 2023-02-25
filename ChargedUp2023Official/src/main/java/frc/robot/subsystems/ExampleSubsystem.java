@@ -4,30 +4,12 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class PneumaticClawSubsystem extends SubsystemBase {
+public class ExampleSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-
-  private static DoubleSolenoid piston1;
-  private static DoubleSolenoid piston2;
-  private static Compressor compressor;
-
- 
-
-  public PneumaticClawSubsystem() {
-    piston1 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 1, 0); // change this
-    piston2 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 8, 9); // change this
-    compressor = new Compressor(1, PneumaticsModuleType.REVPH); // the default module for PH is 1
-    
-    compressor.enableHybrid(20, 30); // check if the min pressure should be 30
-    
-  }
+  public ExampleSubsystem() {}
 
   /**
    * Example command factory method.
@@ -56,27 +38,10 @@ public class PneumaticClawSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Pressure value: ", (compressor.getPressure())); // added 24.02 to zero it, but idk if it's even important to do so - 24.02 + 
-
-  } 
+  }
 
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
-  }
-
-  public static Compressor getCompressor()
-  {
-    return compressor;
-  }
-
-  public static DoubleSolenoid getPiston1()
-  {
-    return piston1;
-  }
-
-  public static DoubleSolenoid getPiston2()
-  {
-    return piston2;
   }
 }

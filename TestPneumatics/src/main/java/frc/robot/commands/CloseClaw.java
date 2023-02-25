@@ -22,6 +22,7 @@ public class CloseClaw extends CommandBase {
    * @param subsystem The subsystem used by this command.
    */
   public CloseClaw(PneumaticClawSubsystem subsystem) {
+
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -34,7 +35,8 @@ public class CloseClaw extends CommandBase {
     
     //PneumaticClawSubsystem.getCompressor().enableAnalog(1, 5);
 
-    PneumaticClawSubsystem.getPiston().set(Value.kReverse);
+    PneumaticClawSubsystem.getPiston1().set(Value.kReverse);
+    PneumaticClawSubsystem.getPiston2().set(Value.kReverse);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -46,7 +48,8 @@ public class CloseClaw extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // IDK WHETHER THIS NEEDS ANYTHING HERE
-    PneumaticClawSubsystem.getPiston().set(Value.kOff);
+    PneumaticClawSubsystem.getPiston1().set(Value.kOff);
+    PneumaticClawSubsystem.getPiston2().set(Value.kOff);
      //PneumaticClawSubsystem.getCompressor().disable();
   }
 
