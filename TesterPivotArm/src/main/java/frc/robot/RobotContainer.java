@@ -4,18 +4,13 @@
 
 package frc.robot;
 
+import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.Autos;
+import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Constants.OperatorConstants;
-import frc.robot.Constants.PivotDirection;
-import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
-//import frc.robot.commands.MovePivotArm;
-import frc.robot.subsystems.ControllerSubsystem;
-import frc.robot.subsystems.DriveMotorSubsystem;
-import frc.robot.subsystems.ExampleSubsystem;
-//import frc.robot.subsystems.PivotArmSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -26,9 +21,6 @@ import frc.robot.subsystems.ExampleSubsystem;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final ControllerSubsystem controllerSubsystem = new ControllerSubsystem();
-  private final DriveMotorSubsystem driveMotorSubsystem = new DriveMotorSubsystem();
-  //private final PivotArmSubsystem pivotArmSubsystem = new PivotArmSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -57,10 +49,6 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-
-    //ControllerSubsystem.getPivotArmForwardButton().whileTrue(new MovePivotArm(pivotArmSubsystem, PivotDirection.UP));
-    //ControllerSubsystem.getPivotArmBackwardButton().whileTrue(new MovePivotArm(pivotArmSubsystem, PivotDirection.DOWN));
-
   }
 
   /**

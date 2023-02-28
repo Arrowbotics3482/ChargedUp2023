@@ -15,21 +15,5 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
-    
   }
-  // add constants outside of operator constants!
-  
-  // PIVOT ARM CONSTANTS
-  public enum PivotDirection
-    {
-        UP, DOWN
-    }
-  
-  public static final double PIVOT_ARM_SPEED = 0.3;
-
-  //drive system constants
-  public static final int driveFBAxisID = 1;
-  public static final int driveTurnAxisID = 4;
-
-  public static final double driveLimitCoefficient = 0.6;
 }

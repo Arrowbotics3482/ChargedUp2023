@@ -8,9 +8,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.Constants;
 
 public class DriveMotorSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
@@ -27,16 +29,20 @@ public class DriveMotorSubsystem extends SubsystemBase {
   private static DifferentialDrive drive;
 
   public DriveMotorSubsystem() {
-    leftFrontMotor = new Spark(0);
-    leftBackMotor = new Spark(0);
+    leftFrontMotor = new Spark(3);
+    leftBackMotor = new Spark(2);
     rightFrontMotor = new Spark(0);
-    rightBackMotor = new Spark(0);
+    rightBackMotor = new Spark(1);
 
     leftMotors = new MotorControllerGroup(leftFrontMotor, leftBackMotor);
     rightMotors = new MotorControllerGroup(rightFrontMotor, rightBackMotor);
 
     drive = new DifferentialDrive(leftMotors, rightMotors);
+    
+    double fb = ControllerSubsystem.getController1().getRawAxis(Constants.driveFBAxisID) * Constants.driveLimitCoefficient;
+    double turn = ControllerSubsystem.getController1().getRawAxis(Constants.driveTurnAxisID) * Constants.driveLimitCoefficient;
 
+    drive.arcadeDrive(fb, turn);
   }
 
   /**
@@ -66,7 +72,7 @@ public class DriveMotorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    
+    SmartDashboard.putNumber("axis", ControllerSubsystem.getController1().getRawAxis(Constants.driveFBAxisID));
   }
 
   @Override
