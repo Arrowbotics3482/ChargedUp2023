@@ -26,8 +26,8 @@ import frc.robot.subsystems.ExampleSubsystem;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final ControllerSubsystem controllerSubsystem = new ControllerSubsystem();
-  private final DriveMotorSubsystem driveMotorSubsystem = new DriveMotorSubsystem();
+  private static final ControllerSubsystem controllerSubsystem = new ControllerSubsystem();
+  public static final DriveMotorSubsystem driveMotorSubsystem = new DriveMotorSubsystem();
   //private final PivotArmSubsystem pivotArmSubsystem = new PivotArmSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed

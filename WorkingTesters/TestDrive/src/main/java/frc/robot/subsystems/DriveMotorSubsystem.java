@@ -1,3 +1,4 @@
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -28,21 +29,27 @@ public class DriveMotorSubsystem extends SubsystemBase {
 
   private static DifferentialDrive drive;
 
+  private static double fb;
+  private static double turn;
+
   public DriveMotorSubsystem() {
     leftFrontMotor = new Spark(3);
     leftBackMotor = new Spark(2);
     rightFrontMotor = new Spark(0);
     rightBackMotor = new Spark(1);
 
+    /*
+    leftFrontMotor.setInverted(true);
+    leftBackMotor.setInverted(true);
+    */
+
+    //rightFrontMotor.setInverted(true);
+
     leftMotors = new MotorControllerGroup(leftFrontMotor, leftBackMotor);
     rightMotors = new MotorControllerGroup(rightFrontMotor, rightBackMotor);
 
     drive = new DifferentialDrive(leftMotors, rightMotors);
     
-    double fb = ControllerSubsystem.getController1().getRawAxis(Constants.driveFBAxisID) * Constants.driveLimitCoefficient;
-    double turn = ControllerSubsystem.getController1().getRawAxis(Constants.driveTurnAxisID) * Constants.driveLimitCoefficient;
-
-    drive.arcadeDrive(fb, turn);
   }
 
   /**
@@ -72,7 +79,13 @@ public class DriveMotorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("axis", ControllerSubsystem.getController1().getRawAxis(Constants.driveFBAxisID));
+    SmartDashboard.putNumber("left joystick axis", ControllerSubsystem.getController1().getRawAxis(Constants.driveFBAxisID));
+    SmartDashboard.putNumber("right joystick axis", ControllerSubsystem.getController1().getRawAxis(Constants.driveTurnAxisID));
+
+    
+
+    drive.setSafetyEnabled(true);
+
   }
 
   @Override
@@ -80,6 +93,14 @@ public class DriveMotorSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
+  public void drive()
+  {
+    //works in implementation, but the IDs seem backwards!!!!
+    fb = ControllerSubsystem.getController1().getRawAxis(Constants.driveFBAxisID) * Constants.driveLimitCoefficient;
+    turn = ControllerSubsystem.getController1().getRawAxis(Constants.driveTurnAxisID) * Constants.driveLimitCoefficient;
+    drive.arcadeDrive(fb, turn);
+  }
   
 
 }
+
