@@ -31,5 +31,5 @@ public final class Constants {
   public static final int driveFBAxisID = 1;
   public static final int driveTurnAxisID = 4;
 
-  public static final double driveLimitCoefficient = 0.3;
+  public static final double driveLimitCoefficient = 0.5;
 }
