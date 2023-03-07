@@ -4,27 +4,22 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+import frc.robot.LimelightHelpers;
 
-public class PivotArmSubsystem extends SubsystemBase {
+public class LimelightSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private static Spark pivotNEO;
-  private static Encoder encoder;
-  private static boolean direction;
-  private static double displacement;
-
-  public PivotArmSubsystem() {
-    pivotNEO = new Spark(Constants.pivotArmMotorID);
-    encoder = new Encoder(0, 1);
-    encoder.reset();
-    // encoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
-    displacement = encoder.getDistance();
-    //change channel later
+  private final NetworkTable limelight;
+  private static double tx;
+  
+  public LimelightSubsystem() {
+    limelight = NetworkTableInstance.getDefault().getTable("limelight");
   }
+
   /**
    * Example command factory method.
    *
@@ -52,16 +47,8 @@ public class PivotArmSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    direction = encoder.getDirection();
-    double temp = encoder.getDistance();
-    if(!direction && displacement > 0){
-      displacement = temp - encoder.getDistance();
-    }
-
-    if(direction && displacement < 0){
-      displacement = temp - encoder.getDistance();
-    }
-
+    tx = limelight.getEntry("tx").getDouble(0.0);
+    SmartDashboard.putNumber("TX", getTX());
   }
 
   @Override
@@ -69,19 +56,8 @@ public class PivotArmSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-  public static Spark getNEO(){
-    return pivotNEO;
-  }
-
-  public static Encoder getEncoder(){
-    return encoder;
-  }
-  
-  public static boolean getConstantDirection(){
-    return direction;
-  }
-
-  public static double getConstantDistance(){
-    return distance;
+  public static double getTX()
+  {
+    return tx;
   }
 }

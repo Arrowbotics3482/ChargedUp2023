@@ -4,27 +4,13 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 
-public class PivotArmSubsystem extends SubsystemBase {
+public class ExampleSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private static Spark pivotNEO;
-  private static Encoder encoder;
-  private static boolean direction;
-  private static double displacement;
+  public ExampleSubsystem() {}
 
-  public PivotArmSubsystem() {
-    pivotNEO = new Spark(Constants.pivotArmMotorID);
-    encoder = new Encoder(0, 1);
-    encoder.reset();
-    // encoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
-    displacement = encoder.getDistance();
-    //change channel later
-  }
   /**
    * Example command factory method.
    *
@@ -52,36 +38,10 @@ public class PivotArmSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    direction = encoder.getDirection();
-    double temp = encoder.getDistance();
-    if(!direction && displacement > 0){
-      displacement = temp - encoder.getDistance();
-    }
-
-    if(direction && displacement < 0){
-      displacement = temp - encoder.getDistance();
-    }
-
   }
 
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
-  }
-
-  public static Spark getNEO(){
-    return pivotNEO;
-  }
-
-  public static Encoder getEncoder(){
-    return encoder;
-  }
-  
-  public static boolean getConstantDirection(){
-    return direction;
-  }
-
-  public static double getConstantDistance(){
-    return distance;
   }
 }

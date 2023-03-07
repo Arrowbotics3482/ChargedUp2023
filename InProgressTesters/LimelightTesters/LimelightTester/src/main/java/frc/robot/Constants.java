@@ -16,15 +16,4 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
-  //pivot arm numbers
-  public static final int pivotArmMotorID = 4;
-  public static final int ENCODER_PIVOT_DIVISOR = 0;
-  // public static final double ENCODER_DISTANCE_PER_PULSE;
-
-  public enum PivotDirection
-  {
-    UP, DOWN
-  }
-
-  public static final double PIVOT_ARM_SPEED = 0.3;
 }
