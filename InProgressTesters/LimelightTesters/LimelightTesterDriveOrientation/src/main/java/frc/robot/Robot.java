@@ -85,8 +85,10 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    SmartDashboard.putNumber("TX", LimelightHelpers.getTX("limelight"));
+    /*SmartDashboard.putNumber("TX", LimelightHelpers.getTX("limelight"));
     SmartDashboard.putNumber("TY", LimelightHelpers.getTY("limelight"));
+    */
+    RobotContainer.driveMotorSubsystem.drive(ControllerSubsystem.getController1().getRawAxis(Constants.driveTurnAxisID) * Constants.driveLimitCoefficient, ControllerSubsystem.getController1().getRawAxis(Constants.driveFBAxisID) * Constants.driveLimitCoefficient);
   }
 
   @Override
