@@ -20,7 +20,7 @@ public class MotorSubsystem extends SubsystemBase {
   // private Talon motor2;
 
   public MotorSubsystem() {
-        motor = new Spark(9);
+        motor = new Spark(5);
 
   }
 
@@ -52,6 +52,8 @@ public class MotorSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     //SmartDashboard.putNumber("axis value: ", ControllerSubsystem.getController().getRawAxis(1));
+    motor.set(ControllerSubsystem.getController().getRawAxis(5));
+
   }
 
   @Override

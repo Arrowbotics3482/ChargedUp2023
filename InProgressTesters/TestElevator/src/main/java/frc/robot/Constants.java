@@ -18,13 +18,13 @@ public final class Constants {
     public static final int pwmchannel = 0;
     public static final double intakeMotorPercent = 0.5;
   }
-  public static final int MOTOR1_ID = 0;
-  public static final int MOTOR2_ID = 1;
+  public static final int MOTOR1_ID = 4;
+  public static final int MOTOR2_ID = 5;
 
   public static final int CONTROLLER_ID = 0;
 
-  public static final int OPPOSITE_DIRECTION = -1;
   public static final int RIGHT_JOYSTICK_Y_AXIS = 5;
-  public static final double MOTOR_SPEED_MULTIPLIER = 0.3;
+  public static final int OPPOSITE_DIRECTION = -1;
+  public static final double MOTOR_SPEED_MULTIPLIER = 0.8;
 
 }
