@@ -9,6 +9,7 @@ import frc.robot.Constants.PivotDirection;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Pivot;
+import frc.robot.commands.ZeroPivot;
 import frc.robot.subsystems.ControllerSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.PivotArmSubsystem;
@@ -53,11 +54,14 @@ public class RobotContainer {
 
     ControllerSubsystem.getTopPOV().whileTrue(new Pivot(pivotArmSubsystem, PivotDirection.UP));
     ControllerSubsystem.getBottomPOV().whileTrue(new Pivot(pivotArmSubsystem, PivotDirection.DOWN));
+    
     // ControllerSubsystem.getLevelPivotArmButton().onTrue();
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+
+    ControllerSubsystem.getZeroPivotArmButton().whileTrue(new ZeroPivot(pivotArmSubsystem));
   }
 
   /**

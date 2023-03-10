@@ -4,25 +4,40 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.geometry.Twist2d;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+
 public class PivotArmSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private static Spark pivotNEO;
+  private static Spark pivotMotor;
   private static Encoder encoder;
+  
   private static boolean direction;
+
+  private static double currentMotorRate;
+  private static double previousMotorRate;
+
   private static double displacement;
 
+  // private static int count;
+  // private static Twist2d twist2D = new Twist2d(0, 0, 0);
+  
+
   public PivotArmSubsystem() {
-    pivotNEO = new Spark(Constants.pivotArmMotorID);
+    pivotMotor = new Spark(Constants.pivotArmMotorID);
     encoder = new Encoder(0, 1);
+    currentMotorRate = 0;
+    previousMotorRate = 0;
+    displacement = 0;
     encoder.reset();
+    // count = 0;
     // encoder.setDistancePerPulse(Constants.ENCODER_DISTANCE_PER_PULSE);
-    displacement = encoder.getDistance();
+    // displacement = encoder.getDistance();
     //change channel later
   }
   /**
@@ -52,15 +67,15 @@ public class PivotArmSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    direction = encoder.getDirection();
-    double temp = encoder.getDistance();
-    if(!direction && displacement > 0){
-      displacement = temp - encoder.getDistance();
-    }
+    // displacement = (.02)
 
-    if(direction && displacement < 0){
-      displacement = temp - encoder.getDistance();
-    }
+    // count++;
+
+    currentMotorRate = encoder.getRate(); 
+    displacement = displacement + ( (currentMotorRate - previousMotorRate) / 0.02 ); // idk if 0.02 would be right because idk what measurements the rate is taken in. rpm prob but i was too lazy to convert it
+    previousMotorRate = currentMotorRate;
+
+    // do we need to use getDistancePerPulse or getDistance
 
   }
 
@@ -69,19 +84,27 @@ public class PivotArmSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-  public static Spark getNEO(){
-    return pivotNEO;
+  public static Spark getPivotMotor(){
+    return pivotMotor;
   }
 
   public static Encoder getEncoder(){
     return encoder;
   }
-  
-  public static boolean getConstantDirection(){
-    return direction;
+
+  /*
+  public static double getConstantDisplacement(){
+    return displacement;
+  }
+  */
+
+  public static void resetDisplacement()
+  {
+    displacement = 0;
   }
 
-  public static double getConstantDistance(){
-    return distance;
+  public static double getDisplacement()
+  {
+    return displacement;
   }
 }

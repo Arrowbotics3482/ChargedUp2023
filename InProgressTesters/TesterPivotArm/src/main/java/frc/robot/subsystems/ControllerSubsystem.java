@@ -17,7 +17,8 @@ public class ControllerSubsystem extends SubsystemBase {
   private static POVButton topPOV;
   private static POVButton bottomPOV;
   private static Joystick controller2;
-  private static JoystickButton levelPivotArmButton;
+  private static JoystickButton zeroPivotArmButton;
+
 
   public ControllerSubsystem() {
     controller2 = new Joystick(1);
@@ -38,8 +39,8 @@ public class ControllerSubsystem extends SubsystemBase {
     return bottomPOV;
   }
 
-  public static JoystickButton getLevelPivotArmButton(){
-    return levelPivotArmButton;
+  public static JoystickButton getZeroPivotArmButton(){
+    return zeroPivotArmButton;
   }
   /**
    * Example command factory method.
