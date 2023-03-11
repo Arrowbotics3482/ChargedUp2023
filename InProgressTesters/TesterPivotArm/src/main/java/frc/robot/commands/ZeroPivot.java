@@ -29,15 +29,17 @@ public class ZeroPivot extends CommandBase {
   @Override
   public void initialize()
   {
-    // assuming the pivot arm's origin is at its bottom-most position:
-    if (PivotArmSubsystem.getDisplacement() > 0) 
-    {
-      PivotArmSubsystem.getPivotMotor().set(-1); // need to do this until the motor reaches the end, but should not go past or the motor will be ruined, unless we press and hold a button to completely zero (which i think would work)
-    }
     // when the displacement is equal to 0, the motor will stop moving
-    
+    // assuming the pivot arm's origin is at its bottom-most position:
+    while(PivotArmSubsystem.getDisplacement() > 0) 
+    {
+      PivotArmSubsystem.getPivotMotor().set(-1 * Constants.PIVOT_ARM_SPEED); // need to do this until the motor reaches the end, but should not go past or the motor will be ruined, unless we press and hold a button to completely zero (which i think would work)
+    }
+    while(PivotArmSubsystem.getDisplacement() < 0)
+    {
+      PivotArmSubsystem.getPivotMotor().set(Constants.PIVOT_ARM_SPEED);
+    }
   }
-
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -50,7 +52,6 @@ public class ZeroPivot extends CommandBase {
     // pivotArmSubsystem.getEncoder().reset();
 
     PivotArmSubsystem.getPivotMotor().set(0);
-    PivotArmSubsystem.resetDisplacement();
   }
 
   // Returns true when the command should end.

@@ -24,7 +24,7 @@ public class ControllerSubsystem extends SubsystemBase {
     controller2 = new Joystick(1);
     topPOV = new POVButton(controller2, 0);
     bottomPOV = new POVButton(controller2, 180);
-    levelPivotArmButton = new JoystickButton(controller2, 1);
+    zeroPivotArmButton = new JoystickButton(controller2, 1);
   }
 
   public static Joystick getController2(){

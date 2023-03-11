@@ -36,7 +36,7 @@ public class Pivot extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    PivotArmSubsystem.getNEO().set(directionMultiplier * Constants.PIVOT_ARM_SPEED);
+    PivotArmSubsystem.getPivotMotor().set(directionMultiplier * Constants.PIVOT_ARM_SPEED);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -46,7 +46,7 @@ public class Pivot extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    PivotArmSubsystem.getNEO().set(0);
+    PivotArmSubsystem.getPivotMotor().set(0);
   }
 
   // Returns true when the command should end.

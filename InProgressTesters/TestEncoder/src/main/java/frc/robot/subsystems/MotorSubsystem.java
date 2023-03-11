@@ -23,9 +23,8 @@ public class MotorSubsystem extends SubsystemBase {
   // private Talon motor2;
 
   public MotorSubsystem() {
-        motor = new Spark(9);
-        encoder = new Encoder(0, 1); // may need to change the DIO ports
-
+    motor = new Spark(4);
+    encoder = new Encoder(0, 1); // may need to change the DIO ports
   }
 
   /**
