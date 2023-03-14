@@ -14,9 +14,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants;
-import frc.robot.Constants.DriveAdjust;
 
-public class DriveMotorSubsystem extends SubsystemBase {
+public class DriveSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
 
  
@@ -33,19 +32,16 @@ public class DriveMotorSubsystem extends SubsystemBase {
   private static double fb;
   private static double turn;
 
-  private static DriveAdjust driveAdjust;
-
-  public DriveMotorSubsystem() {
-    leftFrontMotor = new Spark(2);
-    leftBackMotor = new Spark(3);
+  public DriveSubsystem() {
+    leftFrontMotor = new Spark(3);
+    leftBackMotor = new Spark(2);
     rightFrontMotor = new Spark(0);
     rightBackMotor = new Spark(1);
 
-    driveAdjust = DriveAdjust.OFF;
 
     leftMotors = new MotorControllerGroup(leftFrontMotor, leftBackMotor);
     rightMotors = new MotorControllerGroup(rightFrontMotor, rightBackMotor);
-
+    
     leftMotors.setInverted(true);
 
     drive = new DifferentialDrive(leftMotors, rightMotors);
@@ -79,10 +75,13 @@ public class DriveMotorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("left joystick axis", ControllerSubsystem.getController().getRawAxis(Constants.driveFBAxisID));
-    SmartDashboard.putNumber("right joystick axis", ControllerSubsystem.getController().getRawAxis(Constants.driveTurnAxisID));
+    SmartDashboard.putNumber("left joystick axis", ControllerSubsystem.getController1().getRawAxis(Constants.DRIVE_FB_AXIS_ID));
+    SmartDashboard.putNumber("right joystick axis", ControllerSubsystem.getController1().getRawAxis(Constants.DRIVE_TURN_AXIS_ID));
+
+    
 
     drive.setSafetyEnabled(true);
+
   }
 
   @Override
@@ -90,34 +89,12 @@ public class DriveMotorSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-  public static void drive(double fbValue, double turnValue)
+  public static void drive()
   {
     //works in implementation, but the IDs seem backwards!!!!
-    
-    //fb = ControllerSubsystem.getController1().getRawAxis(Constants.driveFBAxisID) * Constants.driveLimitCoefficient;
-    //turn = ControllerSubsystem.getController1().getRawAxis(Constants.driveTurnAxisID) * Constants.driveLimitCoefficient;
-    
-    fb = fbValue;
-    turn = turnValue;
-    
-    drive.arcadeDrive(fb, turn);
-  }
-  
-  public static DriveAdjust getDriveAdjustState()
-  {
-    return driveAdjust;
-  }
-
-  public static void switchDriveAdjust()
-  {
-    if(driveAdjust == DriveAdjust.ON)
-    {
-      driveAdjust = DriveAdjust.OFF;
-    }
-    else if(driveAdjust == DriveAdjust.OFF)
-    {
-      driveAdjust = DriveAdjust.ON;
-    }
+    fb = ControllerSubsystem.getController1().getRawAxis(Constants.DRIVE_FB_AXIS_ID) * Constants.DRIVE_LIMIT_COEFFICIENT;
+    turn = ControllerSubsystem.getController1().getRawAxis(Constants.DRIVE_TURN_AXIS_ID) * Constants.DRIVE_LIMIT_COEFFICIENT;
+    drive.arcadeDrive(turn, fb);
   }
 }
 

@@ -16,12 +16,13 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
-  public static final int driveFBAxisID = 1;
-  public static final int driveTurnAxisID = 4;
-  public static final double driveLimitCoefficient = 0.4;
-  public enum DriveAdjust
-  {
-    ON, OFF
-  }
+public static final int CONTROLLER1_ID = 0;
 
+public static final int PIVOT_ARM_MOTOR_ID = 0;
+public static final int PIVOT_UP_DIRECTION = 0;
+public static final int PIVOT_DOWN_DIRECTION = 90;
+public static final double PIVOT_ARM_SPEED = 0.6;
+public enum PivotDirection{
+  UP, DOWN
+}
 }

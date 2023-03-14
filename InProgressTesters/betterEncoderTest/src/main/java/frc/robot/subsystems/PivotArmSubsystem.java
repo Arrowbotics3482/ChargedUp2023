@@ -4,20 +4,22 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Joystick;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants;
 
-public class ControllerSubsystem extends SubsystemBase {
+public class PivotArmSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private static Joystick controller;
-  private static JoystickButton button;
+  public static WPI_TalonSRX pivotArmMotor;
+  public static Encoder pivotEncoder;
 
-  public ControllerSubsystem() 
-  {
-    controller = new Joystick(0);
-    button = new JoystickButton(controller, 1);
+  public PivotArmSubsystem() {
+    pivotArmMotor = new WPI_TalonSRX(Constants.PIVOT_ARM_MOTOR_ID);
+    pivotEncoder = new Encoder(0, 1);
   }
 
   /**
@@ -47,6 +49,7 @@ public class ControllerSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("motor speed: ", pivotEncoder.getRate());
   }
 
   @Override
@@ -54,13 +57,11 @@ public class ControllerSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-  public static Joystick getController()
-  {
-    return controller;
+  public static WPI_TalonSRX getPivotArmMotor() {
+    return pivotArmMotor;
   }
 
-  public static JoystickButton getButton()
-  {
-    return button;
+  public static Encoder getPivotEncoder() {
+    return pivotEncoder;
   }
 }

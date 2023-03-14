@@ -16,12 +16,15 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
-  public static final int driveFBAxisID = 1;
-  public static final int driveTurnAxisID = 4;
-  public static final double driveLimitCoefficient = 0.4;
-  public enum DriveAdjust
-  {
-    ON, OFF
-  }
 
+public static final int CONTROLLER_1_ID = 0;
+public static final int CONTROLLER_2_ID = 1;
+
+public static final int DRIVE_FB_AXIS_ID = 0;
+public static final int DRIVE_TURN_AXIS_ID = 0;
+public static final double DRIVE_LIMIT_COEFFICIENT = 0;
+public static final int ELEVATOR_AXIS_ID = 0;
+public static final double ELEVATOR_SPEED_MULTIPLIER = 0;
+public static final int ELEVATORMOTOR2_ID = 0;
+public static final int ELEVATORMOTOR1_ID = 0;
 }

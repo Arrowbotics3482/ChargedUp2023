@@ -7,17 +7,19 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.Constants;
 
 public class ControllerSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private static Joystick controller;
-  private static JoystickButton button;
+  public static Joystick controller;
+  public static POVButton pivotUpButton;
+  public static POVButton pivotDownButton;
 
-  public ControllerSubsystem() 
-  {
-    controller = new Joystick(0);
-    button = new JoystickButton(controller, 1);
+  public ControllerSubsystem() {
+    controller = new Joystick(Constants.CONTROLLER1_ID);
+    pivotUpButton = new POVButton(controller, Constants.PIVOT_UP_DIRECTION);
+    pivotDownButton = new POVButton(controller, Constants.PIVOT_DOWN_DIRECTION);
   }
 
   /**
@@ -54,13 +56,15 @@ public class ControllerSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-  public static Joystick getController()
-  {
+  public static Joystick getController() {
     return controller;
   }
 
-  public static JoystickButton getButton()
-  {
-    return button;
+  public static POVButton getPivotUpButton() {
+    return pivotUpButton;
+  }
+
+  public static POVButton getPivotDownButton() {
+    return pivotDownButton;
   }
 }

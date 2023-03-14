@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.math.geometry.Twist2d;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -74,6 +75,9 @@ public class PivotArmSubsystem extends SubsystemBase {
     currentMotorRate = encoder.getRate(); 
     displacement = displacement + ( (currentMotorRate - previousMotorRate) / 0.02 ); // idk if 0.02 would be right because idk what measurements the rate is taken in. rpm prob but i was too lazy to convert it
     previousMotorRate = currentMotorRate;
+
+    SmartDashboard.putNumber("Current Motor Speed", currentMotorRate);
+    SmartDashboard.putNumber("Displacement", displacement);
 
     // do we need to use getDistancePerPulse or getDistance
 

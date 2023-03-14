@@ -23,7 +23,7 @@ public class ControllerSubsystem extends SubsystemBase {
   public ControllerSubsystem() {
     //controller = new Joystick(0);
     controller = new Joystick(0);
-    button = new POVButton(controller, 0);
+    button = new POVButton(controller, 0); // should this be 0 or 1
     // buton = new JoystickButton(controller, 1);
 
   }

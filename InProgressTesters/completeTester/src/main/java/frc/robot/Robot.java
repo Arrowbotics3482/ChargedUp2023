@@ -5,13 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Constants.DriveAdjust;
-import frc.robot.subsystems.ControllerSubsystem;
-import frc.robot.subsystems.DriveMotorSubsystem;
-import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -19,7 +15,7 @@ import frc.robot.subsystems.LimelightSubsystem;
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
-public class Robot extends TimedRobot{
+public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
@@ -56,8 +52,7 @@ public class Robot extends TimedRobot{
   public void disabledInit() {}
 
   @Override
-  public void disabledPeriodic() {
-  }
+  public void disabledPeriodic() {}
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
@@ -88,12 +83,7 @@ public class Robot extends TimedRobot{
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    if(DriveMotorSubsystem.getDriveAdjustState() == DriveAdjust.OFF)
-    {
-      DriveMotorSubsystem.drive(
-        ControllerSubsystem.getController().getRawAxis(Constants.driveFBAxisID) * Constants.driveLimitCoefficient, 
-        ControllerSubsystem.getController().getRawAxis(Constants.driveTurnAxisID) * Constants.driveLimitCoefficient);
-    } 
+    DriveSubsystem.drive();
   }
 
   @Override

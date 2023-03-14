@@ -4,30 +4,33 @@
 
 package frc.robot.commands;
 
+import frc.robot.LimelightHelpers;
+import frc.robot.subsystems.DriveMotorSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
 public class CorrectRobotOrientation extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ExampleSubsystem m_subsystem;
+  private final LimelightSubsystem limelightSubsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public CorrectRobotOrientation(ExampleSubsystem subsystem) {
-    m_subsystem = subsystem;
+  public CorrectRobotOrientation(LimelightSubsystem limelightSubsystem) {
+    this.limelightSubsystem = limelightSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(subsystem);
+    addRequirements(limelightSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() 
   {
-    
+    DriveMotorSubsystem.switchDriveAdjust();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,14 +38,15 @@ public class CorrectRobotOrientation extends CommandBase {
   public void execute() 
   {
     // is this like periodic?
-    if (LimelightSubsystem.getTX() > 0)
+    if (LimelightHelpers.getTX("limelight") > 0)
     {
-      RobotContainer.driveMotorSubsystem.drive(-0.2 , 0); // turn, fb
+      DriveMotorSubsystem.drive(0, 0.3); // turn, fb
     }
-    else if (LimelightSubsystem.getTX() < 0)
+    else if(LimelightHelpers.getTX("limelight") < 0)
     {
-      RobotContainer.driveMotorSubsystem.drive(0.2 , 0);
+      DriveMotorSubsystem.drive(0 , -0.3);
     }
+    System.out.println("bruh");
   }
 
   // Called once the command ends or is interrupted.
@@ -50,6 +54,8 @@ public class CorrectRobotOrientation extends CommandBase {
   public void end(boolean interrupted) 
   {
     // may have to reset the drive()
+    DriveMotorSubsystem.drive(0, 0);
+    DriveMotorSubsystem.switchDriveAdjust();
   }
 
   // Returns true when the command should end.

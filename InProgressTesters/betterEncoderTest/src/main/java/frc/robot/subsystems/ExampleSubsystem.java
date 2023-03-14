@@ -4,21 +4,12 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-public class ControllerSubsystem extends SubsystemBase {
+public class ExampleSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private static Joystick controller;
-  private static JoystickButton button;
-
-  public ControllerSubsystem() 
-  {
-    controller = new Joystick(0);
-    button = new JoystickButton(controller, 1);
-  }
+  public ExampleSubsystem() {}
 
   /**
    * Example command factory method.
@@ -52,15 +43,5 @@ public class ControllerSubsystem extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
-  }
-
-  public static Joystick getController()
-  {
-    return controller;
-  }
-
-  public static JoystickButton getButton()
-  {
-    return button;
   }
 }
