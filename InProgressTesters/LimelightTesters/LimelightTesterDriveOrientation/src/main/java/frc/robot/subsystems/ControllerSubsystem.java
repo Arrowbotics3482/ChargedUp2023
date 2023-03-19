@@ -8,16 +8,23 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants;
 
 public class ControllerSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private static Joystick controller;
+  private static Joystick controller1;
+  private static Joystick controller2;
   private static JoystickButton button;
+  private static JoystickButton button2;
 
   public ControllerSubsystem() 
   {
-    controller = new Joystick(0);
-    button = new JoystickButton(controller, 1);
+    // Controller 1:
+    controller1 = new Joystick(Constants.CONTROLLER1_ID);
+    controller2 = new Joystick(Constants.CONTROLLER2_ID);
+    button = new JoystickButton(controller2, 1);
+    button2 = new JoystickButton(controller2, 2);
+
   }
 
   /**
@@ -54,13 +61,26 @@ public class ControllerSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-  public static Joystick getController()
+  public static Joystick getController1()
   {
-    return controller;
+    return controller1;
+  }
+
+  public static Joystick getController2()
+  {
+    return controller2;
   }
 
   public static JoystickButton getButton()
   {
     return button;
   }
+
+  public static JoystickButton getButton2()
+  {
+    return button2;
+  }
+
+  
+
 }

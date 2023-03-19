@@ -6,10 +6,12 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
-import frc.robot.commands.CorrectRobotOrientation;
+import frc.robot.commands.CorrectRobotX;
+import frc.robot.commands.CorrectRobotY;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ControllerSubsystem;
 import frc.robot.subsystems.DriveMotorSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -28,6 +30,7 @@ public class RobotContainer {
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final ControllerSubsystem controllerSubsystem = new ControllerSubsystem();
   private final DriveMotorSubsystem driveMotorSubsystem = new DriveMotorSubsystem();
+  private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -57,7 +60,9 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-    ControllerSubsystem.getButton().whileTrue(new CorrectRobotOrientation(limelightSubsystem));
+    ControllerSubsystem.getButton().whileTrue(new CorrectRobotX(limelightSubsystem)); // whileTrue is whilePressed
+    ControllerSubsystem.getButton2().whileTrue(new CorrectRobotY(limelightSubsystem));
+    //onTrue is one press activates a c   ommand
   }
 
   /**

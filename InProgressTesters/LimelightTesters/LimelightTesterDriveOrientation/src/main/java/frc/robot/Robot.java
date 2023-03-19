@@ -91,8 +91,8 @@ public class Robot extends TimedRobot{
     if(DriveMotorSubsystem.getDriveAdjustState() == DriveAdjust.OFF)
     {
       DriveMotorSubsystem.drive(
-        ControllerSubsystem.getController().getRawAxis(Constants.driveFBAxisID) * Constants.driveLimitCoefficient, 
-        ControllerSubsystem.getController().getRawAxis(Constants.driveTurnAxisID) * Constants.driveLimitCoefficient);
+        ControllerSubsystem.getController1().getRawAxis(Constants.driveFBAxisID) * Constants.driveLimitCoefficient, 
+        ControllerSubsystem.getController1().getRawAxis(Constants.driveTurnAxisID) * Constants.driveLimitCoefficient);
     } 
   }
 

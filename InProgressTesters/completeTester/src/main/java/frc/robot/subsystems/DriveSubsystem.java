@@ -91,10 +91,9 @@ public class DriveSubsystem extends SubsystemBase {
 
   public static void drive()
   {
-    //works in implementation, but the IDs seem backwards!!!!
     fb = ControllerSubsystem.getController1().getRawAxis(Constants.DRIVE_FB_AXIS_ID) * Constants.DRIVE_LIMIT_COEFFICIENT;
     turn = ControllerSubsystem.getController1().getRawAxis(Constants.DRIVE_TURN_AXIS_ID) * Constants.DRIVE_LIMIT_COEFFICIENT;
-    drive.arcadeDrive(turn, fb);
+    drive.arcadeDrive(fb, turn);
   }
 }
 

@@ -5,13 +5,13 @@
 package frc.robot.commands;
 
 import frc.robot.LimelightHelpers;
-import frc.robot.subsystems.DriveMotorSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class CorrectRobotOrientation extends CommandBase {
+public class CorrectRobotX extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final LimelightSubsystem limelightSubsystem;
 
@@ -20,7 +20,7 @@ public class CorrectRobotOrientation extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public CorrectRobotOrientation(LimelightSubsystem limelightSubsystem) {
+  public CorrectRobotX(LimelightSubsystem limelightSubsystem) {
     this.limelightSubsystem = limelightSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(limelightSubsystem);
@@ -30,7 +30,7 @@ public class CorrectRobotOrientation extends CommandBase {
   @Override
   public void initialize() 
   {
-    DriveMotorSubsystem.switchDriveAdjust();
+    DriveSubsystem.switchDriveAdjust();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -40,13 +40,14 @@ public class CorrectRobotOrientation extends CommandBase {
     // is this like periodic?
     if (LimelightHelpers.getTX("limelight") > 0)
     {
-      DriveMotorSubsystem.drive(0, 0.3); // turn, fb
+      DriveSubsystem.drive(0, 0.4); // turn, fb
+      System.out.println("r");
     }
     else if(LimelightHelpers.getTX("limelight") < 0)
     {
-      DriveMotorSubsystem.drive(0 , -0.3);
+      DriveSubsystem.drive(0 , -0.4);
+      System.out.println("l");
     }
-    System.out.println("bruh");
   }
 
   // Called once the command ends or is interrupted.
@@ -54,8 +55,8 @@ public class CorrectRobotOrientation extends CommandBase {
   public void end(boolean interrupted) 
   {
     // may have to reset the drive()
-    DriveMotorSubsystem.drive(0, 0);
-    DriveMotorSubsystem.switchDriveAdjust();
+    DriveSubsystem.drive(0, 0);
+    DriveSubsystem.switchDriveAdjust();
   }
 
   // Returns true when the command should end.

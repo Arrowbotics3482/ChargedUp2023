@@ -79,10 +79,10 @@ public class DriveMotorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("left joystick axis", ControllerSubsystem.getController().getRawAxis(Constants.driveFBAxisID));
-    SmartDashboard.putNumber("right joystick axis", ControllerSubsystem.getController().getRawAxis(Constants.driveTurnAxisID));
+    SmartDashboard.putNumber("left joystick axis", ControllerSubsystem.getController1().getRawAxis(Constants.driveFBAxisID));
+    SmartDashboard.putNumber("right joystick axis", ControllerSubsystem.getController1().getRawAxis(Constants.driveTurnAxisID));
 
-    drive.setSafetyEnabled(true);
+    //drive.setSafetyEnabled(true);
   }
 
   @Override
@@ -92,10 +92,6 @@ public class DriveMotorSubsystem extends SubsystemBase {
 
   public static void drive(double fbValue, double turnValue)
   {
-    //works in implementation, but the IDs seem backwards!!!!
-    
-    //fb = ControllerSubsystem.getController1().getRawAxis(Constants.driveFBAxisID) * Constants.driveLimitCoefficient;
-    //turn = ControllerSubsystem.getController1().getRawAxis(Constants.driveTurnAxisID) * Constants.driveLimitCoefficient;
     
     fb = fbValue;
     turn = turnValue;
