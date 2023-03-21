@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -38,15 +39,17 @@ public class CorrectRobotX extends CommandBase {
   public void execute() 
   {
     // is this like periodic?
-    if (LimelightHelpers.getTX("limelight") > 0)
+    if(Math.abs(LimelightHelpers.getTX("limelight")) < Constants.LIMELIGHT_X_THRESHOLD)
+    {
+      DriveSubsystem.drive(0, 0);
+    }
+    else if(LimelightHelpers.getTX("limelight") > 0)
     {
       DriveSubsystem.drive(0, 0.4); // turn, fb
-      System.out.println("r");
     }
     else if(LimelightHelpers.getTX("limelight") < 0)
     {
       DriveSubsystem.drive(0 , -0.4);
-      System.out.println("l");
     }
   }
 

@@ -48,10 +48,10 @@ public class PivotArmCommand extends CommandBase {
     {
       System.out.println("up");
     }
-    /*else if(pivotDirection == PivotDirection.DOWN)
+    else if(pivotDirection == PivotDirection.DOWN)
     {
       System.out.println("down");
-    }*/
+    }
   }
 
   // Called once the command ends or is interrupted.

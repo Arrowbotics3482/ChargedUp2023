@@ -4,21 +4,9 @@
 
 package frc.robot;
 
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
-import org.opencv.highgui.HighGui;
-import org.opencv.imgproc.Imgproc;
-
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.CvSink;
-import edu.wpi.first.cscore.CvSource;
-import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.ElevatorSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -60,10 +48,7 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {
-    
-    ElevatorSubsystem.getDistSens().setAutomaticMode(false);
-  }
+  public void disabledInit() {}
 
   @Override
   public void disabledPeriodic() {}
@@ -92,15 +77,11 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    ElevatorSubsystem.getDistSens().setAutomaticMode(true);
-    ElevatorSubsystem.getDistSens().setEnabled(true);
   }
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {
-    DriveSubsystem.drive();
-  }
+  public void teleopPeriodic() {}
 
   @Override
   public void testInit() {
@@ -119,49 +100,4 @@ public class Robot extends TimedRobot {
   /** This function is called periodically whilst in simulation. */
   @Override
   public void simulationPeriodic() {}
-  /* 
-  private void createCamera() {
-    m_visionThread = new Thread(
-        () -> {
-          // Get the UsbCamera from CameraServer
-          UsbCamera camera = CameraServer.startAutomaticCapture();
-          // Set the resolution
-          camera.setResolution(240, 180);
-
-          // Get a CvSink. This will capture Mats from the camera
-          CvSink cvSink = CameraServer.getVideo();
-
-          // Mats are very memory expensive. Lets reuse this Mat.
-          Mat mat = new Mat();
-
-          // Put a rectangle on the image
-          Imgproc.rectangle(mat, new Point(20, 20), new Point(50, 50), new Scalar(255, 0, 0), 20);
-
-          // Setup a CvSource. This will send images back to the Dashboard
-          CvSource outputStream = CameraServer.putVideo("Rectangle", 240, 180);
-
-          // This cannot be 'true'. The program will never exit if it is. This lets the
-          // robot stop this thread when restarting robot code or deploying.
-          while (!Thread.interrupted()) {
-            // Tell the CvSink to grab a frame from the camera and put it in the source mat.
-            // If there is an error notify the output.
-            if (cvSink.grabFrame(mat) == 0) {
-              // Send the output the error.
-              outputStream.notifyError(cvSink.getError());
-              // Skip the rest of the current iteration
-              continue;
-            }
-
-            // Put a rectangle on the image
-            Imgproc.line(mat, new Point(20, 20), new Point(50, 50), new Scalar(255, 0, 0), 20);
-
-            outputStream.putFrame(mat);
-            HighGui.imshow("lmao", mat);
-            HighGui.waitKey();
-          }
-        });
-    m_visionThread.setDaemon(true);
-    m_visionThread.start();
-  }
-  */
 }

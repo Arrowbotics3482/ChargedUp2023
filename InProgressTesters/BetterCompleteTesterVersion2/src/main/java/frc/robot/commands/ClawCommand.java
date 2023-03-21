@@ -7,7 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.ClawDirection;
+import frc.robot.Constants.ClawPosition;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.PneumaticClawSubsystem;
 
@@ -16,7 +16,7 @@ public class ClawCommand extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   // private final ExampleSubsystem m_subsystem;
   private final PneumaticClawSubsystem pneumaticClawSubsystem;
-  private static ClawDirection clawDirection;
+  private ClawPosition clawPosition;
 
 
   /**
@@ -24,9 +24,9 @@ public class ClawCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ClawCommand(PneumaticClawSubsystem pneumaticClawSubsystem, ClawDirection clawDirection) {
+  public ClawCommand(PneumaticClawSubsystem pneumaticClawSubsystem, ClawPosition clawPosition) {
     this.pneumaticClawSubsystem = pneumaticClawSubsystem;
-    this.clawDirection = clawDirection;
+    this.clawPosition = clawPosition;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(pneumaticClawSubsystem);
   }
@@ -34,19 +34,19 @@ public class ClawCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // PneumaticClawSubsystem.getCompressor().enableAnalog(1, 5);
-    if (clawDirection == ClawDirection.OPEN)
+    if(clawPosition == ClawPosition.OPEN)
     {
       PneumaticClawSubsystem.getPiston1().set(Value.kForward);
       PneumaticClawSubsystem.getPiston2().set(Value.kForward);
-      PneumaticClawSubsystem.setClawState(ClawDirection.OPEN);
+      PneumaticClawSubsystem.setClawState(ClawPosition.OPEN);
+      System.out.println("open");
     }
-    else if (clawDirection == ClawDirection.CLOSE)
+    if (clawPosition == ClawPosition.CLOSE)
     {
       PneumaticClawSubsystem.getPiston1().set(Value.kReverse);
       PneumaticClawSubsystem.getPiston2().set(Value.kReverse);
-      PneumaticClawSubsystem.setClawState(ClawDirection.CLOSE);
-      
+      PneumaticClawSubsystem.setClawState(ClawPosition.CLOSE);
+      System.out.println("close");
     }
     
   }
@@ -60,10 +60,8 @@ public class ClawCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // IDK WHETHER THIS NEEDS ANYTHING HERE
-    PneumaticClawSubsystem.getPiston1().set(Value.kOff);
-    PneumaticClawSubsystem.getPiston2().set(Value.kOff);
-    // PneumaticClawSubsystem.getCompressor().disable();
+    //PneumaticClawSubsystem.getPiston1().set(Value.kOff);
+    //PneumaticClawSubsystem.getPiston2().set(Value.kOff);
   }
 
   // Returns true when the command should end.

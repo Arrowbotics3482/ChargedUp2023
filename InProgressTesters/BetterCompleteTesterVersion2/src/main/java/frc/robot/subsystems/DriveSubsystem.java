@@ -100,6 +100,14 @@ public class DriveSubsystem extends SubsystemBase {
   {
     fb = ControllerSubsystem.getController1().getRawAxis(Constants.DRIVE_FB_AXIS_ID) * Constants.DRIVE_LIMIT_COEFFICIENT;
     turn = ControllerSubsystem.getController1().getRawAxis(Constants.DRIVE_TURN_AXIS_ID) * Constants.DRIVE_LIMIT_COEFFICIENT;
+    if(ControllerSubsystem.getDriveFBFineTuneButton().getAsBoolean())
+    {
+      fb *= Constants.DRIVE_FINE_TUNE_PROPORTION;
+    }
+    if(ControllerSubsystem.getDriveTurnFineTuneButton().getAsBoolean())
+    {
+      turn *= Constants.DRIVE_FINE_TUNE_PROPORTION;
+    }
     drive.arcadeDrive(fb, turn);
   }
 

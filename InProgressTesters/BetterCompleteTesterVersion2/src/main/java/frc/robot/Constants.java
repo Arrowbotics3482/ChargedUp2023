@@ -18,10 +18,17 @@ public final class Constants {
   }
   public static final int CONTROLLER1_ID = 0;
   public static final int CONTROLLER2_ID = 1;
+  public static final int CLAW_OPEN_BUTTON_ID = 1;
+  public static final int CLAW_CLOSE_BUTTON_ID = 2;
+  public static final int CORRECT_ROBOT_Y_BUTTON_ID = 4;
+  public static final int CORRECT_ROBOT_X_BUTTON_ID = 3;
+  public static final int DRIVE_FB_FINE_TUNE_BUTTON_ID = 5;
+  public static final int DRIVE_TURN_FINE_TUNE_BUTTON_ID = 6;
 
   public static final int DRIVE_FB_AXIS_ID = 1;
   public static final int DRIVE_TURN_AXIS_ID = 4;
   public static final double DRIVE_LIMIT_COEFFICIENT = 0.6;
+  public static final double DRIVE_FINE_TUNE_PROPORTION = 0.7;
 
   public enum DriveAdjust
   {
@@ -37,6 +44,8 @@ public final class Constants {
   public static final int ELEVATOR_MOTOR2_CHANNEL = 5;
   public static final double ELEVATOR_SPEED_MULTIPLIER = 0.7;
   public static final int ELEVATOR_AXIS_ID = 1;
+  public static final double ELEVATOR_MIN_LIMIT = 0.5;
+  public static final double ELEVATOR_MAX_LIMIT = 15;
 
   public static final int PIVOT_ARM_MOTOR_CHANNEL = 6;
   public static final double PIVOT_MOTOR_SPEED = 0.6;
@@ -46,11 +55,11 @@ public final class Constants {
     UP, DOWN
   }
 
-  public enum ClawDirection
+  public enum ClawPosition
   {
     OPEN, CLOSE
   }
 
   public static final double LIMELIGHT_Y_THRESHOLD = 10;
-
+  public static final double LIMELIGHT_X_THRESHOLD = 10;
 }

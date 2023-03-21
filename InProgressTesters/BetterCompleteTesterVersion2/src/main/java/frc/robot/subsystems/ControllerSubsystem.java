@@ -20,8 +20,10 @@ public class ControllerSubsystem extends SubsystemBase {
   private static POVButton pivotDownButton;
   private static JoystickButton clawOpenButton;
   private static JoystickButton clawCloseButton;
-  private static JoystickButton correctChassisOrientationButton;
-  private static JoystickButton correctElevatorOrientationButton;
+  private static JoystickButton correctRobotXButton;
+  private static JoystickButton correctRobotYButton;
+  private static JoystickButton driveFBFineTuneButton;
+  private static JoystickButton driveTurnFineTuneButton;
 
   public ControllerSubsystem() {
     controller1 = new Joystick(Constants.CONTROLLER1_ID); 
@@ -30,13 +32,14 @@ public class ControllerSubsystem extends SubsystemBase {
     pivotUpButton = new POVButton(controller2, 0);
     pivotDownButton = new POVButton(controller2, 180);
 
-    clawOpenButton = new JoystickButton(controller2, 1);
-    clawCloseButton = new JoystickButton(controller2, 2);
+    clawOpenButton = new JoystickButton(controller2, Constants.CLAW_OPEN_BUTTON_ID);
+    clawCloseButton = new JoystickButton(controller2, Constants.CLAW_CLOSE_BUTTON_ID);
 
-    correctChassisOrientationButton = new JoystickButton(controller2, 3);
-    correctElevatorOrientationButton = new JoystickButton(controller2, 4);
+    correctRobotXButton = new JoystickButton(controller2, Constants.CORRECT_ROBOT_X_BUTTON_ID);
+    correctRobotYButton = new JoystickButton(controller2, Constants.CORRECT_ROBOT_Y_BUTTON_ID);
 
-
+    driveFBFineTuneButton = new JoystickButton(controller1, Constants.DRIVE_FB_FINE_TUNE_BUTTON_ID);
+    driveTurnFineTuneButton = new JoystickButton(controller1, Constants.DRIVE_TURN_FINE_TUNE_BUTTON_ID);
   }
 
   /**
@@ -97,13 +100,21 @@ public class ControllerSubsystem extends SubsystemBase {
     return clawCloseButton;
   }
 
-  public static JoystickButton getCorrectChassisOrientationButton() {
-    return correctChassisOrientationButton;
+  public static JoystickButton getCorrectRobotXButton() {
+    return correctRobotXButton;
   }
 
-  public static JoystickButton getCorrectElevatorOrientationButton() {
-    return correctElevatorOrientationButton;
+  public static JoystickButton getCorrectRobotYButton() {
+    return correctRobotYButton;
   }
 
- 
+  public static JoystickButton getDriveFBFineTuneButton()
+  {
+    return driveFBFineTuneButton;
+  }
+
+  public static JoystickButton getDriveTurnFineTuneButton()
+  {
+    return driveTurnFineTuneButton;
+  }
 }
