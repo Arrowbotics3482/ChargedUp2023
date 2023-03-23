@@ -24,7 +24,8 @@ public class AutoDriveCommand extends CommandBase {
   private double driveSpeed;
   private double turnSpeed;
   private double elevatorSpeed;
-  private ClawCommand clawCommand;
+  private ClawCommand closeClawCommand;
+  private ClawCommand openClawCommand;
   private AutonStartPosition autonStartPosition;
   private double multiplier = 1;
 
@@ -38,7 +39,8 @@ public class AutoDriveCommand extends CommandBase {
     this.elevatorSubsystem = elevatorSubsystem; 
     this.pneumaticClawSubsystem = pneumaticClawSubsystem;
     this.autonStartPosition = autonStartPosition;
-    clawCommand = new ClawCommand(pneumaticClawSubsystem, ClawPosition.OPEN);
+    closeClawCommand = new ClawCommand(pneumaticClawSubsystem, ClawPosition.CLOSE);
+    openClawCommand = new ClawCommand(pneumaticClawSubsystem, ClawPosition.OPEN);
     // Use addRequirements() here to declare subsystem dependencies.
     timer = new Timer();
     addRequirements(driveSubsystem);
@@ -68,43 +70,43 @@ public class AutoDriveCommand extends CommandBase {
     elevatorSpeed = 0;
     turnSpeed = 0;
 
-    if(timer.get() < 4.8) // close claw and bring elevator up
+    if(timer.get() < 3.5) // close claw and bring elevator up
     {
-      new ClawCommand(pneumaticClawSubsystem, ClawPosition.CLOSE);
+      closeClawCommand.schedule();
 
-      elevatorSpeed = -0.3;
+      elevatorSpeed = -0.4;
       ElevatorSubsystem.runElevator(elevatorSpeed);
     }
-    else if(timer.get() < 5.1) // drive forward
+    else if(timer.get() < 3.8) // drive forward
     {
-      driveSpeed = 0.3;
-      DriveSubsystem.drive(driveSpeed, 0);
-    }
-    else if(timer.get() < 5.3) // open claw to release cube
-    {
-      new ClawCommand(pneumaticClawSubsystem, ClawPosition.OPEN);
-    }
-    else if(timer.get() < 5.8) // drive backward
-    {
-      driveSpeed = -0.3;
-      DriveSubsystem.drive(driveSpeed, 0);
-    }
-    else if (timer.get() < 6.1) // bring elevator down
-    {
-      elevatorSpeed = 0.3;
-      ElevatorSubsystem.runElevator(elevatorSpeed);
-    }
-    else if(timer.get() < 6.4) // turn robot a few degrees to the left
-    {
-      turnSpeed = -0.3 * multiplier;
-      DriveSubsystem.drive(0, turnSpeed);
-    }
-    else if(timer.get() < 7) // move backwards to hit the red line
-    {
-      driveSpeed = -0.3;
+      driveSpeed = -0.5;
       DriveSubsystem.drive(driveSpeed, 0);
     }
     
+    else if(timer.get() < 5) // open claw to release cube
+    {
+      openClawCommand.schedule();
+    }
+    /*
+    else if(timer.get() < 5) // drive backward a little so the claw doesn't hit the cube homes
+    {
+      openClawCommand.cancel();
+      driveSpeed = -0.4;
+      DriveSubsystem.drive(driveSpeed, 0);
+    }
+    else if (timer.get() < 8.5) // bring elevator down
+    {
+      elevatorSpeed = 0.4;
+      ElevatorSubsystem.runElevator(elevatorSpeed);
+    }
+    
+    else if(timer.get() < 11.5) // move backwards to hit the red line
+    {
+      driveSpeed = -0.3;
+      DriveSubsystem.drive(driveSpeed, 0);
+    }
+    */
+
   }
 
   // Called once the command ends or is interrupted.
