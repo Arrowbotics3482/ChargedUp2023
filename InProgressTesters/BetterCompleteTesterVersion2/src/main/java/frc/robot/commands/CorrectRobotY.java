@@ -37,19 +37,17 @@ public class CorrectRobotY extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    /* 
-    if(Math.abs(LimelightHelpers.getTY("limelight")) < Constants.LIMELIGHT_Y_THRESHOLD)
+    if(LimelightHelpers.getTY("limelight") == Constants.LIMELIGHT_Y_THRESHOLD)
     {
       ElevatorSubsystem.runElevator(0);
     }
-    */
-    if(LimelightHelpers.getTY("limelight") > 0)
+    else if(LimelightHelpers.getTY("limelight") > Constants.LIMELIGHT_Y_THRESHOLD)
     {
-      ElevatorSubsystem.runElevator(-0.3); // elevator goes down
+      ElevatorSubsystem.runElevator(0.3); // elevator goes down
     }
-    else if(LimelightHelpers.getTY("limelight") < 0)
+    else if(LimelightHelpers.getTY("limelight") < Constants.LIMELIGHT_Y_THRESHOLD)
     {
-      ElevatorSubsystem.runElevator(0.3); // elevator goes up
+      ElevatorSubsystem.runElevator(-0.3); // elevator goes up
     }
   }
 

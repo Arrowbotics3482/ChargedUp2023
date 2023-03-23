@@ -27,7 +27,6 @@ public class ElevatorSubsystem extends SubsystemBase {
     elevatorMotor2 = new Spark(Constants.ELEVATOR_MOTOR2_CHANNEL);
     elevatorAdjust = ElevatorAdjust.OFF;
     distSens = new Rev2mDistanceSensor(Port.kOnboard);
-    distSens.setAutomaticMode(true);
   }
 
   @Override
@@ -35,18 +34,36 @@ public class ElevatorSubsystem extends SubsystemBase {
   {
     if(distSens.isRangeValid()) {
       SmartDashboard.putNumber("Range Onboard", distSens.getRange());
-      SmartDashboard.putNumber("Timestamp Onboard", distSens.getTimestamp());
-      if(distSens.getRange() < Constants.ELEVATOR_MIN_LIMIT || distSens.getRange() > Constants.ELEVATOR_MAX_LIMIT)
-      {
-        runElevator(0);
-      }
-    }
-
+    } 
     if(elevatorAdjust == ElevatorAdjust.OFF)
     {
-      runElevator(ControllerSubsystem.getController2().getRawAxis(Constants.ELEVATOR_AXIS_ID) * Constants.ELEVATOR_SPEED_MULTIPLIER);
+      if(distSens.getRange() <= Constants.ELEVATOR_MIN_LIMIT)
+      {
+        if(ControllerSubsystem.getController2().getRawAxis(Constants.ELEVATOR_AXIS_ID) < 0)
+        {
+          runElevator(ControllerSubsystem.getController2().getRawAxis(Constants.ELEVATOR_AXIS_ID) * Constants.ELEVATOR_SPEED_MULTIPLIER);
+        }
+        else
+        {
+          runElevator(0);
+        }
+      }
+      else if(distSens.getRange() >= Constants.ELEVATOR_MAX_LIMIT)
+      {
+        if(ControllerSubsystem.getController2().getRawAxis(Constants.ELEVATOR_AXIS_ID) > 0)
+        {
+          runElevator(ControllerSubsystem.getController2().getRawAxis(Constants.ELEVATOR_AXIS_ID) * Constants.ELEVATOR_SPEED_MULTIPLIER);
+        }
+        else
+        {
+          runElevator(0);
+        }
+      }
+      else
+      {
+        runElevator(ControllerSubsystem.getController2().getRawAxis(Constants.ELEVATOR_AXIS_ID) * Constants.ELEVATOR_SPEED_MULTIPLIER);
+      }
     }
-
   }
 
   @Override

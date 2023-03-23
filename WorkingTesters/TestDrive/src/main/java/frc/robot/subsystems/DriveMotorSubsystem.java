@@ -82,11 +82,6 @@ public class DriveMotorSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("left joystick axis", ControllerSubsystem.getController1().getRawAxis(Constants.driveFBAxisID));
     SmartDashboard.putNumber("right joystick axis", ControllerSubsystem.getController1().getRawAxis(Constants.driveTurnAxisID));
 
-    
-
-    drive.setSafetyEnabled(true);
-
-
   }
 
   @Override

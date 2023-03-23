@@ -7,6 +7,7 @@ package frc.robot;
 import frc.robot.Constants.ClawPosition;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.Constants.PivotDirection;
+import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ClawCommand;
 import frc.robot.commands.CorrectRobotX;
@@ -39,6 +40,9 @@ public class RobotContainer {
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final PivotArmSubsystem pivotArmSubsystem = new PivotArmSubsystem();
   private final PneumaticClawSubsystem pneumaticClawSubsystem = new PneumaticClawSubsystem();
+
+  // where you should change the start position for auton!
+  private final AutoDriveCommand autoDrive = new AutoDriveCommand(driveSubsystem, elevatorSubsystem, pneumaticClawSubsystem, Constants.AutonStartPosition.RED_LONG_OR_BLUE_SHORT);
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -89,6 +93,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return autoDrive;
   }
 }

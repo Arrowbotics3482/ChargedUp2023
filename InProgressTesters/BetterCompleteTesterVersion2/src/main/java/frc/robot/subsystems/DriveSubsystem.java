@@ -84,11 +84,6 @@ public class DriveSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("left joystick axis", ControllerSubsystem.getController1().getRawAxis(Constants.DRIVE_FB_AXIS_ID));
     SmartDashboard.putNumber("right joystick axis", ControllerSubsystem.getController1().getRawAxis(Constants.DRIVE_TURN_AXIS_ID));
-
-    
-
-    drive.setSafetyEnabled(true);
-
   }
 
   @Override
