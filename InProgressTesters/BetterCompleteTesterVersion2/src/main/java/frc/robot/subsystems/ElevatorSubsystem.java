@@ -35,6 +35,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     if(distSens.isRangeValid()) {
       SmartDashboard.putNumber("Range Onboard", distSens.getRange());
     } 
+    
     if(elevatorAdjust == ElevatorAdjust.OFF)
     {
       if(distSens.getRange() <= Constants.ELEVATOR_MIN_LIMIT)
@@ -64,6 +65,11 @@ public class ElevatorSubsystem extends SubsystemBase {
         runElevator(ControllerSubsystem.getController2().getRawAxis(Constants.ELEVATOR_AXIS_ID) * Constants.ELEVATOR_SPEED_MULTIPLIER);
       }
     }
+
+    ElevatorSubsystem.elevatorMotor1.set(-1 * Constants.ELEVATOR_SPEED_FINE_TUNE_MULTIPLIER_FOR_TELEOP * ControllerSubsystem.getController2().getRawAxis(Constants.ELEVATOR_AXIS_FINE_TUNE_ID));
+    ElevatorSubsystem.elevatorMotor2.set(Constants.ELEVATOR_SPEED_FINE_TUNE_MULTIPLIER_FOR_TELEOP * ControllerSubsystem.getController2().getRawAxis(Constants.ELEVATOR_AXIS_FINE_TUNE_ID));
+
+    // ONE OF THESE MOTORS NEEDS TO GO IN THE OPPOSITE WAY
   }
 
   @Override

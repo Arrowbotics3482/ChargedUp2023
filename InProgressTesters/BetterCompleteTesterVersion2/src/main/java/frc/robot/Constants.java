@@ -42,8 +42,12 @@ public final class Constants {
 
   public static final int ELEVATOR_MOTOR1_CHANNEL = 4;
   public static final int ELEVATOR_MOTOR2_CHANNEL = 5;
-  public static final double ELEVATOR_SPEED_MULTIPLIER = 0.5;
+  public static final double ELEVATOR_SPEED_MULTIPLIER = 0.5; // for DISTANCE SENSOR FINE TUNE
+  
+  public static final double ELEVATOR_SPEED_FINE_TUNE_MULTIPLIER_FOR_TELEOP = 0.4;
+
   public static final int ELEVATOR_AXIS_ID = 1;
+  public static final int ELEVATOR_AXIS_FINE_TUNE_ID = 5;
   public static final double ELEVATOR_MIN_LIMIT = 0.5;
   public static final double ELEVATOR_MAX_LIMIT = 18;
 

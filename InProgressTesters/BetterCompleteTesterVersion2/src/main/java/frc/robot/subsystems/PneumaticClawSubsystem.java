@@ -24,8 +24,8 @@ public class PneumaticClawSubsystem extends SubsystemBase {
  
 
   public PneumaticClawSubsystem() {
-    piston1 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1); 
-    piston2 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 9, 8); 
+    piston1 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 2, 3); 
+    piston2 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 8, 9); 
     compressor = new Compressor(1, PneumaticsModuleType.REVPH); // the default module for PH is 1
     
     compressor.enableHybrid(40, 50); 
