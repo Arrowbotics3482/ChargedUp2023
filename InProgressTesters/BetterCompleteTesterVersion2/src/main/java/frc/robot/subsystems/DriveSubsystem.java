@@ -82,8 +82,6 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("left joystick axis", ControllerSubsystem.getController1().getRawAxis(Constants.DRIVE_FB_AXIS_ID));
-    SmartDashboard.putNumber("right joystick axis", ControllerSubsystem.getController1().getRawAxis(Constants.DRIVE_TURN_AXIS_ID));
   }
 
   @Override
@@ -101,7 +99,7 @@ public class DriveSubsystem extends SubsystemBase {
     }
     if(ControllerSubsystem.getDriveTurnFineTuneButton().getAsBoolean())
     {
-      turn *= Constants.DRIVE_FINE_TUNE_PROPORTION;
+      turn *= Constants.DRIVE_FINE_TUNE_PROPORTION * 0.9;
     }
     drive.arcadeDrive(fb, turn);
   }

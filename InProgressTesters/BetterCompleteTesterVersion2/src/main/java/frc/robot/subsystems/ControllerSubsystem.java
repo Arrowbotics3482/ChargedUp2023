@@ -16,30 +16,33 @@ public class ControllerSubsystem extends SubsystemBase {
 
   private static Joystick controller1;
   private static Joystick controller2;
-  private static POVButton pivotUpButton;
-  private static POVButton pivotDownButton;
-  private static JoystickButton clawOpenButton;
-  private static JoystickButton clawCloseButton;
+  private static Joystick controllerMaster;
+  private static JoystickButton clawIntakeButton;
+  private static JoystickButton clawEjectButton;
   private static JoystickButton correctRobotXButton;
   private static JoystickButton correctRobotYButton;
   private static JoystickButton driveFBFineTuneButton;
   private static JoystickButton driveTurnFineTuneButton;
+  private static JoystickButton elevatorFineTuneButton;
+  private static POVButton macroElevatorDeployButton;
 
   public ControllerSubsystem() {
     controller1 = new Joystick(Constants.CONTROLLER1_ID); 
     controller2 = new Joystick(Constants.CONTROLLER2_ID);
+    controllerMaster = new Joystick(Constants.CONTROLLERMASTER_ID);
 
-    pivotUpButton = new POVButton(controller2, 0);
-    pivotDownButton = new POVButton(controller2, 180);
-
-    clawOpenButton = new JoystickButton(controller2, Constants.CLAW_OPEN_BUTTON_ID);
-    clawCloseButton = new JoystickButton(controller2, Constants.CLAW_CLOSE_BUTTON_ID);
+    clawIntakeButton = new JoystickButton(controller1, Constants.CLAW_INTAKE_BUTTON_ID);
+    clawEjectButton = new JoystickButton(controller1, Constants.CLAW_EJECT_BUTTON_ID);
 
     correctRobotXButton = new JoystickButton(controller2, Constants.CORRECT_ROBOT_X_BUTTON_ID);
     correctRobotYButton = new JoystickButton(controller2, Constants.CORRECT_ROBOT_Y_BUTTON_ID);
 
     driveFBFineTuneButton = new JoystickButton(controller1, Constants.DRIVE_FB_FINE_TUNE_BUTTON_ID);
     driveTurnFineTuneButton = new JoystickButton(controller1, Constants.DRIVE_TURN_FINE_TUNE_BUTTON_ID);
+
+    elevatorFineTuneButton = new JoystickButton(controller2, Constants.ELEVATOR_FINE_TUNE_BUTTON);
+
+    macroElevatorDeployButton = new POVButton(controller2, 0);
   }
 
   /**
@@ -84,20 +87,16 @@ public class ControllerSubsystem extends SubsystemBase {
     return controller2;
   }
 
-  public static POVButton getPivotUpButton() {
-    return pivotUpButton;
+  public static Joystick getControllerMaster() {
+    return controllerMaster;
   }
 
-  public static POVButton getPivotDownButton() {
-    return pivotDownButton;
+  public static JoystickButton getClawIntakeButton() {
+    return clawIntakeButton;
   }
 
-  public static JoystickButton getClawOpenButton() {
-    return clawOpenButton;
-  }
-
-  public static JoystickButton getClawCloseButton() {
-    return clawCloseButton;
+  public static JoystickButton getClawEjectButton() {
+    return clawEjectButton;
   }
 
   public static JoystickButton getCorrectRobotXButton() {
@@ -116,5 +115,15 @@ public class ControllerSubsystem extends SubsystemBase {
   public static JoystickButton getDriveTurnFineTuneButton()
   {
     return driveTurnFineTuneButton;
+  }
+
+  public static JoystickButton getElevatorFineTuneButton()
+  {
+    return elevatorFineTuneButton;
+  }
+
+  public static POVButton getMacroElevatorDeployButton()
+  {
+    return macroElevatorDeployButton;
   }
 }

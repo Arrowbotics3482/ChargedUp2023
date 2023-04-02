@@ -18,13 +18,18 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Constants.ClawAdjust;
+import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 /**
- * The VM is configured to automatically run this class, and to call the functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the name of this class or
- * the package after creating this project, you must also update the build.gradle file in the
+ * The VM is configured to automatically run this class, and to call the
+ * functions corresponding to
+ * each mode, as described in the TimedRobot documentation. If you change the
+ * name of this class or
+ * the package after creating this project, you must also update the
+ * build.gradle file in the
  * project.
  */
 public class Robot extends TimedRobot {
@@ -33,28 +38,36 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   /**
-   * This function is run when the robot is first started up and should be used for any
+   * This function is run when the robot is first started up and should be used
+   * for any
    * initialization code.
    */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
+    // Instantiate our RobotContainer. This will perform all our button bindings,
+    // and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
   }
 
   /**
-   * This function is called every 20 ms, no matter the mode. Use this for items like diagnostics
+   * This function is called every 20 ms, no matter the mode. Use this for items
+   * like diagnostics
    * that you want ran during disabled, autonomous, teleoperated and test.
    *
-   * <p>This runs after the mode specific periodic functions, but before LiveWindow and
+   * <p>
+   * This runs after the mode specific periodic functions, but before LiveWindow
+   * and
    * SmartDashboard integrated updating.
    */
   @Override
   public void robotPeriodic() {
-    // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
-    // commands, running already-scheduled commands, removing finished or interrupted commands,
-    // and running subsystem periodic() methods.  This must be called from the robot's periodic
+    // Runs the Scheduler. This is responsible for polling buttons, adding
+    // newly-scheduled
+    // commands, running already-scheduled commands, removing finished or
+    // interrupted commands,
+    // and running subsystem periodic() methods. This must be called from the
+    // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
   }
@@ -66,9 +79,13 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+  }
 
-  /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
+  /**
+   * This autonomous runs the autonomous command selected by your
+   * {@link RobotContainer} class.
+   */
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
@@ -81,7 +98,8 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+  }
 
   @Override
   public void teleopInit() {
@@ -94,6 +112,9 @@ public class Robot extends TimedRobot {
     }
     ElevatorSubsystem.getDistSens().setAutomaticMode(true);
     ElevatorSubsystem.getDistSens().setEnabled(true);
+    if (ClawSubsystem.getClawAdjustState() == ClawAdjust.OFF) {
+      ClawSubsystem.getClawMotor().set(0.2);
+    }
   }
 
   /** This function is called periodically during operator control. */
@@ -110,58 +131,64 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+  }
 
   /** This function is called once when the robot is first started up. */
   @Override
-  public void simulationInit() {}
+  public void simulationInit() {
+  }
 
   /** This function is called periodically whilst in simulation. */
   @Override
-  public void simulationPeriodic() {}
-  /* 
-  private void createCamera() {
-    m_visionThread = new Thread(
-        () -> {
-          // Get the UsbCamera from CameraServer
-          UsbCamera camera = CameraServer.startAutomaticCapture();
-          // Set the resolution
-          camera.setResolution(240, 180);
-
-          // Get a CvSink. This will capture Mats from the camera
-          CvSink cvSink = CameraServer.getVideo();
-
-          // Mats are very memory expensive. Lets reuse this Mat.
-          Mat mat = new Mat();
-
-          // Put a rectangle on the image
-          Imgproc.rectangle(mat, new Point(20, 20), new Point(50, 50), new Scalar(255, 0, 0), 20);
-
-          // Setup a CvSource. This will send images back to the Dashboard
-          CvSource outputStream = CameraServer.putVideo("Rectangle", 240, 180);
-
-          // This cannot be 'true'. The program will never exit if it is. This lets the
-          // robot stop this thread when restarting robot code or deploying.
-          while (!Thread.interrupted()) {
-            // Tell the CvSink to grab a frame from the camera and put it in the source mat.
-            // If there is an error notify the output.
-            if (cvSink.grabFrame(mat) == 0) {
-              // Send the output the error.
-              outputStream.notifyError(cvSink.getError());
-              // Skip the rest of the current iteration
-              continue;
-            }
-
-            // Put a rectangle on the image
-            Imgproc.line(mat, new Point(20, 20), new Point(50, 50), new Scalar(255, 0, 0), 20);
-
-            outputStream.putFrame(mat);
-            HighGui.imshow("lmao", mat);
-            HighGui.waitKey();
-          }
-        });
-    m_visionThread.setDaemon(true);
-    m_visionThread.start();
+  public void simulationPeriodic() {
   }
-  */
+  /*
+   * private void createCamera() {
+   * m_visionThread = new Thread(
+   * () -> {
+   * // Get the UsbCamera from CameraServer
+   * UsbCamera camera = CameraServer.startAutomaticCapture();
+   * // Set the resolution
+   * camera.setResolution(240, 180);
+   * 
+   * // Get a CvSink. This will capture Mats from the camera
+   * CvSink cvSink = CameraServer.getVideo();
+   * 
+   * // Mats are very memory expensive. Lets reuse this Mat.
+   * Mat mat = new Mat();
+   * 
+   * // Put a rectangle on the image
+   * Imgproc.rectangle(mat, new Point(20, 20), new Point(50, 50), new Scalar(255,
+   * 0, 0), 20);
+   * 
+   * // Setup a CvSource. This will send images back to the Dashboard
+   * CvSource outputStream = CameraServer.putVideo("Rectangle", 240, 180);
+   * 
+   * // This cannot be 'true'. The program will never exit if it is. This lets the
+   * // robot stop this thread when restarting robot code or deploying.
+   * while (!Thread.interrupted()) {
+   * // Tell the CvSink to grab a frame from the camera and put it in the source
+   * mat.
+   * // If there is an error notify the output.
+   * if (cvSink.grabFrame(mat) == 0) {
+   * // Send the output the error.
+   * outputStream.notifyError(cvSink.getError());
+   * // Skip the rest of the current iteration
+   * continue;
+   * }
+   * 
+   * // Put a rectangle on the image
+   * Imgproc.line(mat, new Point(20, 20), new Point(50, 50), new Scalar(255, 0,
+   * 0), 20);
+   * 
+   * outputStream.putFrame(mat);
+   * HighGui.imshow("lmao", mat);
+   * HighGui.waitKey();
+   * }
+   * });
+   * m_visionThread.setDaemon(true);
+   * m_visionThread.start();
+   * }
+   */
 }

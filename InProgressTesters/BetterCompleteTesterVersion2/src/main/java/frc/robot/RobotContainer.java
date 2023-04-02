@@ -4,23 +4,26 @@
 
 package frc.robot;
 
-import frc.robot.Constants.ClawPosition;
+import frc.robot.Constants.ClawDirection;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.Constants.PivotDirection;
+import frc.robot.commands.AutoDockCommand;
 import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ClawCommand;
 import frc.robot.commands.CorrectRobotX;
 import frc.robot.commands.CorrectRobotY;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.PivotArmCommand;
+import frc.robot.commands.MacroElevatorDeployCommand;
+import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.ControllerSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
-import frc.robot.subsystems.PivotArmSubsystem;
-import frc.robot.subsystems.PneumaticClawSubsystem;
+
+import java.lang.ModuleLayer.Controller;
+import java.util.ResourceBundle.Control;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -38,11 +41,11 @@ public class RobotContainer {
   private final DriveSubsystem driveSubsystem = new DriveSubsystem();
   private final LimelightSubsystem limelightSubsystem = new LimelightSubsystem();
   private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
-  private final PivotArmSubsystem pivotArmSubsystem = new PivotArmSubsystem();
-  private final PneumaticClawSubsystem pneumaticClawSubsystem = new PneumaticClawSubsystem();
-
+  private ClawSubsystem clawSubsystem = new ClawSubsystem();
   // where you should change the start position for auton!
-  private final AutoDriveCommand autoDrive = new AutoDriveCommand(driveSubsystem, elevatorSubsystem, pneumaticClawSubsystem, Constants.AutonStartPosition.RED_LONG_OR_BLUE_SHORT);
+   private final AutoDriveCommand autoDrive = new AutoDriveCommand(driveSubsystem, elevatorSubsystem, clawSubsystem, Constants.AutonStartPosition.BLUE_SHORT);
+  // // private final AutoDockCommand autoDrive = new AutoDockCommand(driveSubsystem, elevatorSubsystem, pneumaticClawSubsystem);
+  private final AutoDockCommand autoDock = new AutoDockCommand(driveSubsystem, elevatorSubsystem, clawSubsystem);
 
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -73,26 +76,20 @@ public class RobotContainer {
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
     
-    // Pivot button binding
-    /*
-    ControllerSubsystem.getPivotUpButton().whileTrue(new PivotArmCommand(pivotArmSubsystem, PivotDirection.UP));
-    ControllerSubsystem.getPivotDownButton().whileTrue(new PivotArmCommand(pivotArmSubsystem, PivotDirection.DOWN));
-    */
-    
-    ControllerSubsystem.getClawOpenButton().whileTrue(new ClawCommand(pneumaticClawSubsystem, ClawPosition.OPEN));
-    ControllerSubsystem.getClawCloseButton().whileTrue(new ClawCommand(pneumaticClawSubsystem, ClawPosition.CLOSE));
-
     ControllerSubsystem.getCorrectRobotXButton().whileTrue(new CorrectRobotX(limelightSubsystem));
     ControllerSubsystem.getCorrectRobotYButton().whileTrue(new CorrectRobotY(limelightSubsystem));
+    ControllerSubsystem.getClawEjectButton().whileTrue(new ClawCommand(clawSubsystem, ClawDirection.OUT));
+    ControllerSubsystem.getClawIntakeButton().whileTrue(new ClawCommand(clawSubsystem, ClawDirection.IN));
+    ControllerSubsystem.getMacroElevatorDeployButton().whileTrue(new MacroElevatorDeployCommand(elevatorSubsystem));
   }
 
-  /**
+  /*
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return autoDrive;
+    return autoDock;
   }
 }

@@ -5,59 +5,52 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
-import frc.robot.Constants.PivotDirection;
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.PivotArmSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class PivotArmCommand extends CommandBase {
+public class MacroElevatorDeployCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final PivotArmSubsystem pivotArmSubsystem;
-  private static PivotDirection pivotDirection;
+  private final ElevatorSubsystem elevatorSubsystem;
+  private double elevatorMacroSpeed;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public PivotArmCommand(PivotArmSubsystem pivotArmSubsystem, PivotDirection pivotDirection) {
-    this.pivotArmSubsystem = pivotArmSubsystem;
-    this.pivotDirection = pivotDirection;
+  public MacroElevatorDeployCommand(ElevatorSubsystem elevatorSubsystem) {
+    this.elevatorSubsystem = elevatorSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(pivotArmSubsystem);
+    addRequirements(elevatorSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if(pivotDirection == PivotDirection.UP)
-    {
-      PivotArmSubsystem.getPivotMotor().set(-1 * Constants.PIVOT_MOTOR_SPEED);
-    }
-    else if(pivotDirection == PivotDirection.DOWN)
-    {
-      PivotArmSubsystem.getPivotMotor().set(Constants.PIVOT_MOTOR_SPEED);
-    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(pivotDirection == PivotDirection.UP)
+    elevatorMacroSpeed = 0;
+    if(ElevatorSubsystem.getDistSens().getRange() < Constants.ELEVATOR_MACRO_DISTANCE - Constants.ELEVATOR_MACRO_THRESHOLD)
     {
-      System.out.println("up");
+      elevatorMacroSpeed = -0.4; // moves up
+      ElevatorSubsystem.runElevator(elevatorMacroSpeed);
     }
-    else if(pivotDirection == PivotDirection.DOWN)
+    else if(ElevatorSubsystem.getDistSens().getRange() > Constants.ELEVATOR_MACRO_DISTANCE + Constants.ELEVATOR_MACRO_THRESHOLD)
     {
-      System.out.println("down");
+      elevatorMacroSpeed = 0.4; // move down
+      ElevatorSubsystem.runElevator(elevatorMacroSpeed);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    PivotArmSubsystem.getPivotMotor().set(0);
+    ElevatorSubsystem.runElevator(0);
   }
 
   // Returns true when the command should end.

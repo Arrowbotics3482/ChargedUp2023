@@ -16,10 +16,11 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
-  public static final int CONTROLLER1_ID = 0;
-  public static final int CONTROLLER2_ID = 1;
-  public static final int CLAW_OPEN_BUTTON_ID = 1;
-  public static final int CLAW_CLOSE_BUTTON_ID = 2;
+  public static final int CONTROLLER1_ID = 1;
+  public static final int CONTROLLER2_ID = 0;
+  public static final int CONTROLLERMASTER_ID = 2;
+  public static final int CLAW_INTAKE_BUTTON_ID = 1;
+  public static final int CLAW_EJECT_BUTTON_ID = 2;
   public static final int CORRECT_ROBOT_Y_BUTTON_ID = 4;
   public static final int CORRECT_ROBOT_X_BUTTON_ID = 3;
   public static final int DRIVE_FB_FINE_TUNE_BUTTON_ID = 5;
@@ -27,8 +28,8 @@ public final class Constants {
 
   public static final int DRIVE_FB_AXIS_ID = 1;
   public static final int DRIVE_TURN_AXIS_ID = 4;
-  public static final double DRIVE_LIMIT_COEFFICIENT = 0.7;
-  public static final double DRIVE_FINE_TUNE_PROPORTION = 0.7;
+  public static final double DRIVE_LIMIT_COEFFICIENT = 0.88;
+  public static final double DRIVE_FINE_TUNE_PROPORTION = 0.6;
 
   public enum DriveAdjust
   {
@@ -44,31 +45,35 @@ public final class Constants {
   public static final int ELEVATOR_MOTOR2_CHANNEL = 5;
   public static final double ELEVATOR_SPEED_MULTIPLIER = 0.5; // for DISTANCE SENSOR FINE TUNE
   
-  public static final double ELEVATOR_SPEED_FINE_TUNE_MULTIPLIER_FOR_TELEOP = 0.4;
+  public static final double ELEVATOR_SPEED_FINE_TUNE_MULTIPLIER = 0.3;
 
   public static final int ELEVATOR_AXIS_ID = 1;
   public static final int ELEVATOR_AXIS_FINE_TUNE_ID = 5;
   public static final double ELEVATOR_MIN_LIMIT = 0.5;
   public static final double ELEVATOR_MAX_LIMIT = 18;
+  public static final int ELEVATOR_FINE_TUNE_BUTTON = 5;
 
-  public static final int PIVOT_ARM_MOTOR_CHANNEL = 6;
-  public static final double PIVOT_MOTOR_SPEED = 0.6;
+  public static final double ELEVATOR_MACRO_DISTANCE = 17.15;
+  public static final double ELEVATOR_MACRO_THRESHOLD = 0.25;
 
-  public enum PivotDirection
+  public enum ClawDirection
   {
-    UP, DOWN
+    IN, OUT
   }
-
-  public enum ClawPosition
+  public enum ClawAdjust
   {
-    OPEN, CLOSE
+    ON, OFF
   }
+  public static final int CLAW_MOTOR_CHANNEL = 6;
+  public static final double CLAW_MOTOR_SPEED = 3.5;
 
   public static final double LIMELIGHT_Y_THRESHOLD = 20;
   public static final double LIMELIGHT_X_THRESHOLD = 2;
 
   public enum AutonStartPosition
   {
-    RED_SHORT_OR_BLUE_LONG, RED_LONG_OR_BLUE_SHORT;
+    // RED_SHORT_OR_BLUE_LONG, RED_LONG_OR_BLUE_SHORT
+    // we need to define turning amount and direction through enum of auton start position
+    RED_SHORT, RED_LONG, BLUE_SHORT, BLUE_LONG
   }
 }

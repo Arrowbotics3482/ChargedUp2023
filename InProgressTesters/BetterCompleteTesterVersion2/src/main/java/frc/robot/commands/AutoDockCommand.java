@@ -10,12 +10,13 @@ import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.ClawSubsystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /** An example command that uses an example subsystem. */
-public class AutoDriveCommand extends CommandBase {
+public class AutoDockCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DriveSubsystem driveSubsystem;
   private final ElevatorSubsystem elevatorSubsystem;
@@ -29,13 +30,14 @@ public class AutoDriveCommand extends CommandBase {
   private AutonStartPosition autonStartPosition;
   private double multiplier = 1;
   private double turnAmount = 0;
+  
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public AutoDriveCommand(DriveSubsystem driveSubsystem, ElevatorSubsystem elevatorSubsystem, ClawSubsystem clawSubsystem, AutonStartPosition autonStartPosition) {
+  public AutoDockCommand(DriveSubsystem driveSubsystem, ElevatorSubsystem elevatorSubsystem, ClawSubsystem clawSubsystem) {
     this.driveSubsystem = driveSubsystem;
     this.elevatorSubsystem = elevatorSubsystem;  
     this.clawSubsystem = clawSubsystem;
@@ -50,29 +52,6 @@ public class AutoDriveCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
-    // we need to define direction AND turn amount through enum of auton start position
-
-    // direction of turn
-    if (autonStartPosition == AutonStartPosition.RED_SHORT || autonStartPosition == AutonStartPosition.BLUE_LONG)
-    {
-      multiplier = 1;
-    }
-    else if (autonStartPosition == AutonStartPosition.RED_LONG || autonStartPosition == AutonStartPosition.BLUE_SHORT)
-    {
-      multiplier = -1;
-    }
-
-    // amount of turn
-    if (autonStartPosition == AutonStartPosition.RED_LONG || autonStartPosition == AutonStartPosition.BLUE_LONG)
-    {
-      turnAmount = 0.45;
-    }
-    else if (autonStartPosition == AutonStartPosition.RED_SHORT || autonStartPosition == AutonStartPosition.BLUE_SHORT)
-    {
-      turnAmount = 0.4;
-    }
-    
     timer.reset();
     timer.start();
     
@@ -84,8 +63,7 @@ public class AutoDriveCommand extends CommandBase {
   public void execute() {
     driveSpeed = 0;
     elevatorSpeed = 0;
-    turnSpeed = 0;
-
+    
     
     if(timer.get() > 2.4 && timer.get() < 5.9) // close claw and bring elevator up 5.9 og 1.5 diff -2 mid
     {
@@ -115,17 +93,10 @@ public class AutoDriveCommand extends CommandBase {
       elevatorSpeed = 0.4;
       ElevatorSubsystem.runElevator(elevatorSpeed);
     }
-    
-    else if(timer.get() >= 10.4 && timer.get() < 10.75) // turn one way depending on the starting position 0.35
-    {
-      turnSpeed = multiplier * turnAmount;
-      DriveSubsystem.drive(0, turnSpeed);
-    }
      
-    else if(timer.get() >= 10.75 && timer.get() < 14.4) // move backwards to hit the red line 3.65
+    else if(timer.get() >= 8.4 && timer.get() < 15.1) // move backwards onto charge station 0.35
     {
-      // end time was 14.75, we are changing it to 14.4
-      driveSpeed = 0.55;
+      driveSpeed = 0.45;
       DriveSubsystem.drive(driveSpeed, 0);
     }
     
